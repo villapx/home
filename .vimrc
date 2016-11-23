@@ -28,6 +28,9 @@ set encoding=utf-8
 :colorscheme wombat256mod
 syntax on
 
+" disable cursor blinking
+set guicursor+=a:blinkon0
+
 " highlight searches
 set hlsearch
 
