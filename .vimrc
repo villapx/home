@@ -1,6 +1,8 @@
 set nocompatible    " turn off Vi compatibility
 
-""" begin Vundle stuff
+
+
+""" Vundle stuff """
 
 filetype off
 
@@ -8,8 +10,10 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" plugins
 Plugin 'VundleVim/Vundle.vim'
+
+" plugins
+Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/nerdtree'
 
@@ -19,7 +23,52 @@ Plugin 'michalbachowski/vim-wombat256mod'
 call vundle#end()
 filetype plugin indent on
 
-""" end Vundle stuff
+
+
+""" keymaps """
+
+noremap ,n :NERDTreeToggle <CR>
+noremap ,f :CtrlP <CR>
+noremap ,b :CtrlPBuffer <CR>
+
+" toggle relative or non-relative line numbers
+function! LineNumberToggle()
+    if(&relativenumber == 1)
+        set norelativenumber
+    else
+        set relativenumber
+    endif
+endfunc
+noremap ,l :call LineNumberToggle() <CR>
+
+" resize splits
+nnoremap <C-up> :resize +2 <CR>
+nnoremap <C-down> :resize -2 <CR>
+nnoremap <C-right> :vertical resize +2 <CR>
+nnoremap <C-left> :vertical resize -2 <CR>
+" move between splits
+nnoremap ,wh <C-w>h
+nnoremap ,wj <C-w>j
+nnoremap ,wk <C-w>k
+nnoremap ,wl <C-w>l
+
+" inverse tab
+inoremap <S-tab> <C-d>
+
+
+""" non-basic settings """
+
+" NERDTree settings
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden = 1
+
+" flag trailing whitespace in programming language files
+:highlight TrailingWhitespace ctermbg=red guibg=red
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
+
+
+
+""" basic VIM settings """
 
 " use UTF-8 encoding
 set encoding=utf-8
@@ -67,13 +116,8 @@ set expandtab
 " display line numbers
 set number
 
-" flag trailing whitespace in programming language files
-:highlight TrailingWhitespace ctermbg=red guibg=red
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
-
-" open a NERDTree window in VIM startup
-au vimenter * NERDTree
-
-" allow NERDTree to see hidden files/folders
-let NERDTreeShowHidden=1
+" source site-specific vimrc file
+if !empty(glob("~/.vimrc-site"))
+    source ~/.vimrc-site
+endif
 
