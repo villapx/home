@@ -63,8 +63,8 @@ let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 
 " flag trailing whitespace in programming language files
-:highlight TrailingWhitespace ctermbg=red guibg=red
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
+autocmd ColorScheme * highlight TrailingWhitespace ctermbg=darkgreen guibg=darkgreen
+autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
 
 
 
