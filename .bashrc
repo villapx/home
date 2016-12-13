@@ -19,7 +19,7 @@ command -v dircolors >/dev/null 2>&1 &&
 #   variable is set, so we know we can use xterm-256color
 # apparently, gnome-terminal versions >= 3.13 set VTE_VERSION instead. we'll
 #   tackle that when we get there
-if [ "$COLORTERM" = "gnome-terminal" ]
+if [ "$COLORTERM" = "gnome-terminal" ] && [ "$TERM" = "xterm" ]
 then
     export TERM=xterm-256color
 fi

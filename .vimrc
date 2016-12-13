@@ -27,9 +27,11 @@ filetype plugin indent on
 
 """ keymaps """
 
-noremap ,n :NERDTreeToggle <CR>
-noremap ,f :CtrlP <CR>
-noremap ,b :CtrlPBuffer <CR>
+let mapleader = " "
+
+noremap <Leader>n :NERDTreeToggle <CR>
+noremap <Leader>f :CtrlP <CR>
+noremap <Leader>b :CtrlPBuffer <CR>
 
 " toggle relative or non-relative line numbers
 function! LineNumberToggle()
@@ -39,18 +41,13 @@ function! LineNumberToggle()
         set relativenumber
     endif
 endfunc
-noremap ,l :call LineNumberToggle() <CR>
+noremap <Leader>l :call LineNumberToggle() <CR>
 
 " resize splits
 nnoremap <C-up> :resize +2 <CR>
 nnoremap <C-down> :resize -2 <CR>
 nnoremap <C-right> :vertical resize +2 <CR>
 nnoremap <C-left> :vertical resize -2 <CR>
-" move between splits
-nnoremap ,wh <C-w>h
-nnoremap ,wj <C-w>j
-nnoremap ,wk <C-w>k
-nnoremap ,wl <C-w>l
 
 " inverse tab
 inoremap <S-tab> <C-d>
@@ -74,7 +71,14 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s
 set encoding=utf-8
 
 " choose a color scheme
-:colorscheme wombat256mod
+if $TERM == "xterm-256color" || $TERM == "screen-256color"
+    " if we're in a 256 color terminal, use this color scheme
+    :colorscheme wombat256mod
+elseif filereadable("$VIMRUNTIME/colors/industry.vim")
+    " choose this colorscheme if we don't have 256 colors (and if it's built-in
+    "   to the VIM installation)
+    :colorscheme industry
+endif
 syntax on
 
 " disable cursor blinking
@@ -117,7 +121,7 @@ set expandtab
 set number
 
 " source site-specific vimrc file
-if !empty(glob("~/.vimrc-site"))
+if filereadable("~/.vimrc-site")
     source ~/.vimrc-site
 endif
 
