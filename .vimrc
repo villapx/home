@@ -41,13 +41,23 @@ function! LineNumberToggle()
         set relativenumber
     endif
 endfunc
-noremap <Leader>l :call LineNumberToggle() <CR>
+noremap <Leader>l :call LineNumberToggle()<CR>
+
+" move the current line up or down
+nnoremap <C-S-k> ml:m-2<CR>`l:delm l<CR>
+nnoremap <C-S-j> ml:m+<CR>`l:delm l<CR>
+inoremap <C-S-k> <ESC>:m .-2<CR>==gi
+inoremap <C-S-j> <ESC>:m .+1<CR>==gi
+
+" move the current selection up or down
+vnoremap <C-S-k> :m '<-2<CR>gv=gv
+vnoremap <C-S-j> :m '>+1<CR>gv=gv
 
 " resize splits
-nnoremap <C-up> :resize +2 <CR>
-nnoremap <C-down> :resize -2 <CR>
-nnoremap <C-right> :vertical resize +2 <CR>
-nnoremap <C-left> :vertical resize -2 <CR>
+nnoremap <C-up> :resize +2<CR>
+nnoremap <C-down> :resize -2<CR>
+nnoremap <C-right> :vertical resize +2<CR>
+nnoremap <C-left> :vertical resize -2<CR>
 
 " inverse tab
 inoremap <S-tab> <C-d>
