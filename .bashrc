@@ -5,7 +5,18 @@ export LANG=en_US.UTF-8
 alias la="ls -la"
 alias rm="rm -i"
 alias cp="cp -i"
+alias mv="mv -i"
 alias datetime="date +%m-%d-%Y_%H%M%S"
+
+# don't put duplicate consecutive commands in the history
+HISTCONTROL=ignoredups
+
+# history length in the shell and in the .bash_history file
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# make 'less' more friendly for non-text input files (see lesspipe(1))
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # enable color support for ls if it's available
 command -v dircolors >/dev/null 2>&1 &&
