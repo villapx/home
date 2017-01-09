@@ -1,6 +1,3 @@
-# use UTF-8 encoding
-export LANG=en_US.UTF-8
-
 # aliases
 alias la="ls -la"
 alias rm="rm -i"
@@ -25,18 +22,21 @@ command -v dircolors >/dev/null 2>&1 &&
         alias ls="ls --color=auto";
     }
 
-# gnome-terminal doesn't set the TERM variable to xterm-256color, though it does
-#   support 256 colors. for gnome-terminal version < 3.13, the COLORTERM
-#   variable is set, so we know we can use xterm-256color
-# apparently, gnome-terminal versions >= 3.13 set VTE_VERSION instead. we'll
-#   tackle that when we get there
-if [ "$COLORTERM" = "gnome-terminal" ] && [ "$TERM" = "xterm" ]
-then
-    export TERM=xterm-256color
-fi
+# gnome-terminal and mate-terminal don't set the TERM variable to xterm-256color,
+#   though they do support 256 colors. we can check the COLORTERM variable to
+#   see if we're in one of those terminals and set TERM accordingly
+#   (Note that COLORTERM is only set in gnome-terminal versions < 3.13. after
+#   that, VTE_VERSION is what should be relied on. but starting with VTE
+#   version 0.40, TERM is set to xterm256-color by default, so this becomes
+#   a non-issue at that point)
+case "$COLORTERM" in
+    "gnome-terminal" | "mate-terminal")
+        if [ "$TERM" = "xterm" ]; then
+            export TERM=xterm-256color
+        fi
+esac
 
 # set important environment variables
-export EDITOR=vim
 export GREP_OPTIONS='--color=auto'
 
 # set prompt
@@ -57,8 +57,6 @@ then
     white="$(tput setaf 7)"
 fi
 PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
-
-umask 2  # prevent "others" from getting write permission on created files
 
 # source site-specific rc file, if it exists and is readable
 if [ -r ~/.bashrc-site ]

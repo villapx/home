@@ -2,3 +2,18 @@
 case "$-" in
     *i*) source ~/.bashrc
 esac
+
+# use UTF-8 encoding
+export LANG=en_US.UTF-8
+
+# set important environment variables
+export EDITOR=vim
+
+# prevent "others" from getting write permission on created files
+umask 2
+
+# source site-specific bash_profile file, if it exists and is readable
+if [ -r ~/.bash_profile-site ]
+then
+    source ~/.bash_profile-site
+fi
