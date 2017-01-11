@@ -1,0 +1,2 @@
+! include Xresources file for each application
+#include ".Xresources.d/xterm"

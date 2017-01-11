@@ -1,0 +1,16 @@
+xterm*faceName:    Bitstream Vera Serif Mono
+xterm*faceSize:    11
+xterm*saveLines:   20000
+xterm*borderWidth: 0
+
+! use 256-color terminal
+xterm*termName: xterm-256color
+
+! use UTF-8
+xterm*locale: true
+
+! make xterm recognize URLs so they can be clicked with the mouse
+xterm*charClass: 33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:48
+
+! choose colorscheme
+#include "colorschemes/jvilla_solid"
