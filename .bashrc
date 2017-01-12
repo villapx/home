@@ -1,9 +1,10 @@
 # aliases
-alias la="ls -la"
-alias rm="rm -i"
 alias cp="cp -i"
-alias mv="mv -i"
 alias datetime="date +%m-%d-%Y_%H%M%S"
+alias grep="grep --color=auto"
+alias la="ls -la"
+alias mv="mv -i"
+alias rm="rm -i"
 
 # don't put duplicate consecutive commands in the history
 HISTCONTROL=ignoredups
@@ -35,9 +36,6 @@ case "$COLORTERM" in
             export TERM=xterm-256color
         fi
 esac
-
-# set important environment variables
-export GREP_OPTIONS='--color=auto'
 
 # set prompt
 ncolors=$(tput colors)
