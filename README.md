@@ -1,4 +1,4 @@
-## Linux Home Folder
+## Home Folder Config Files/Dotfiles
 
 Before opening VIM for the first time, run:
 
