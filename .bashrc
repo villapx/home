@@ -56,9 +56,27 @@ then
 fi
 PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
 
+# function to avoid adding duplicate entries to the variable given in $1
+#   e.g.
+#     varmunge PATH ~/bin after
+varmunge () {
+    case ":${!1}:" in
+        *:"$2":*)
+            ;;
+        *)
+            if [ "$3" = "after" ] ; then
+                eval "${1}=\$${1}:$2"
+            else
+                eval "${1}=$2:\$${1}"
+            fi
+    esac
+}
+
 # source site-specific rc file, if it exists and is readable
 if [ -r ~/.bashrc-site ]
 then
     source ~/.bashrc-site
 fi
+
+unset varmunge
 
