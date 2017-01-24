@@ -9,6 +9,9 @@ XTerm*termName: xterm-256color
 ! use UTF-8
 XTerm*locale: true
 
+! explicitly turn off the scrollbar
+XTerm*scrollBar: false
+
 ! make xterm recognize URLs so they can be clicked with the mouse
 XTerm*charClass: 33:48,35-38:48,39:43,42-47:48,58-59:48,61:48,63-64:48,126:48
 
