@@ -77,11 +77,22 @@ autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s
 
 """ basic VIM settings """
 
+" set up the handling of xterm keys when we're in a tmux session
+if $TERM =~ '^screen'
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
 " use UTF-8 encoding
 set encoding=utf-8
 
+" enable the mouse in normal and visual mode
+set mouse=nv
+
 " choose a color scheme
-if $TERM == "xterm-256color" || $TERM == "screen-256color"
+if $TERM =~ "256color$"
     " if we're in a 256 color terminal, use this color scheme
     :colorscheme wombat256mod
 elseif filereadable("$VIMRUNTIME/colors/industry.vim")
