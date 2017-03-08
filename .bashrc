@@ -4,6 +4,7 @@ alias datetime="date +%m-%d-%Y_%H%M%S"
 alias grep="grep --color=auto"
 alias la="ls -la"
 alias mv="mv -i"
+alias psef="ps -ef"
 alias rm="rm -i"
 
 # don't put duplicate consecutive commands in the history
