@@ -1,6 +1,6 @@
 # aliases
 alias cp="cp -i"
-alias datetime="date +%m-%d-%Y_%H%M%S"
+alias datetime="date +%Y-%m-%d_%H%M%S"
 alias grep="grep --color=auto"
 alias la="ls -la"
 alias mv="mv -i"
@@ -56,6 +56,28 @@ then
     white="$(tput setaf 7)"
 fi
 PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
+
+# function to open a webserver on port $2 to serve up the file given as $1.
+# defaults to port 8080 if $2 not given
+webserve () {
+    if [[ ! -r "$1" ]]; then
+        echo "File $1 not found or not readable"
+    else
+        local PORT=8080
+        if [[ "$2" ]]; then
+            PORT="$2"
+        fi
+
+        while true
+        do
+            {
+                echo -ne "HTTP/1.0 200 OK\r\n"
+                echo -ne "Content-Length: $(wc -c < "$1")\r\n\r\n"
+                cat "$1"
+            } | nc -l "$PORT"
+        done
+    fi
+}
 
 # function to avoid adding duplicate entries to the variable given in $1
 #   e.g.
