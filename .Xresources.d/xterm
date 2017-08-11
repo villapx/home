@@ -15,7 +15,7 @@ XTerm*scrollBar: false
 ! disallow programs from setting the window title via control sequences
 XTerm*vt100.allowTitleOps: false
 
-! make the Meta key lways send the escape sequence
+! make the Meta key always send the escape sequence
 XTerm*metaSendsEscape: true
 
 ! make xterm recognize URLs so they can be clicked with the mouse
