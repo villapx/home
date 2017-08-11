@@ -14,8 +14,17 @@ HISTCONTROL=ignoredups
 HISTSIZE=1000
 HISTFILESIZE=2000
 
-# make 'less' more friendly for non-text input files (see lesspipe(1))
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+# make 'less' more friendly for non-text input files.
+#   first, see if lesspipe is available (usually found on Ubuntu variants).
+if [[ -x /usr/bin/lesspipe ]]
+then
+    eval "$(SHELL=/bin/sh lesspipe)"
+
+# otherwise look for lesspipe.sh (often found on RHEL and derivatives)
+elif [[ -x /usr/bin/lesspipe.sh ]]
+then
+    export LESSOPEN="|/usr/bin/lesspipe.sh %s"
+fi
 
 # enable color support for ls if it's available
 command -v dircolors >/dev/null 2>&1 &&
@@ -39,21 +48,24 @@ case "$COLORTERM" in
 esac
 
 # set prompt
-ncolors=$(tput colors)
-if test -n "$ncolors" && test $ncolors -ge 8
+if [[ $TERM ]]
 then
-    bold="$(tput bold)"
-    underline="$(tput smul)"
-    standout="$(tput smso)"
-    normal="$(tput sgr0)"
-    black="$(tput setaf 0)"
-    red="$(tput setaf 1)"
-    green="$(tput setaf 2)"
-    yellow="$(tput setaf 3)"
-    blue="$(tput setaf 4)"
-    magenta="$(tput setaf 5)"
-    cyan="$(tput setaf 6)"
-    white="$(tput setaf 7)"
+    ncolors=$(tput colors)
+    if test -n "$ncolors" && test $ncolors -ge 8
+    then
+        bold="$(tput bold)"
+        underline="$(tput smul)"
+        standout="$(tput smso)"
+        normal="$(tput sgr0)"
+        black="$(tput setaf 0)"
+        red="$(tput setaf 1)"
+        green="$(tput setaf 2)"
+        yellow="$(tput setaf 3)"
+        blue="$(tput setaf 4)"
+        magenta="$(tput setaf 5)"
+        cyan="$(tput setaf 6)"
+        white="$(tput setaf 7)"
+    fi
 fi
 PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
 
