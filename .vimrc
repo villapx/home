@@ -14,8 +14,8 @@ Plugin 'VundleVim/Vundle.vim'
 
 " plugins
 Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/indentpython.vim'
 Plugin 'scrooloose/nerdtree'
+Plugin 'python-mode/python-mode'
 
 " color schemes
 Plugin 'michalbachowski/vim-wombat256mod'
@@ -28,6 +28,9 @@ filetype plugin indent on
 """ keymaps """
 
 let mapleader = " "
+
+" need to remap PythonMode 'breakpoint' keymap before we set the CtrlP hotkeys
+let g:pymode_breakpoint_bind = '<Leader>k'
 
 noremap <Leader>n :NERDTreeToggle <CR>
 noremap <Leader>f :CtrlP <CR>
@@ -68,6 +71,10 @@ inoremap <S-tab> <C-d>
 " NERDTree settings
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
+
+" PythonMode settings
+let g:pymode_folding = 0                " disable automatic code folding
+let g:pymode_options_colorcolumn = 0    " disable coloring the 80th column
 
 " flag trailing whitespace in programming language files
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=darkgreen guibg=darkgreen
@@ -121,7 +128,7 @@ set autoindent
 " always display status line, even if only one window is displayed
 set laststatus=2
 " status line format
-set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P
 
 " use visual bell instead of beeping when doing something wrong
 set visualbell

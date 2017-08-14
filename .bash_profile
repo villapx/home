@@ -1,8 +1,3 @@
-# if this is an interactive shell, source .bashrc
-case "$-" in
-    *i*) source ~/.bashrc
-esac
-
 # use UTF-8 encoding
 export LANG=en_US.UTF-8
 
@@ -17,3 +12,8 @@ if [ -r ~/.bash_profile-site ]
 then
     source ~/.bash_profile-site
 fi
+
+# if this is an interactive shell, source .bashrc
+case "$-" in
+    *i*) source ~/.bashrc
+esac
