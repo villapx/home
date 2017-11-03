@@ -68,6 +68,9 @@ inoremap <S-tab> <C-d>
 
 """ non-basic settings """
 
+" CtrlP settings
+let g:ctrlp_arg_map = 1
+
 " NERDTree settings
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
