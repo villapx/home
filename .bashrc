@@ -107,11 +107,102 @@ varmunge () {
     esac
 }
 
+# function to create an SSH alias, an SFTP alias and SCP download and upload
+#   functions for an SSH server
+# args:
+#   $1: name you'd like to give to the server, a.k.a. the "site name"
+#   $2: IP address or hostname of the server
+#   $3: username you'll log in as
+#   $4: SSH port of the server
+#
+# Example usage:
+#   site_setup my_pc 192.168.0.5 myusername 22
+#
+# That creates the alias 'my_pc', which aliases to the command to SSH into
+#   the server; the alias 'my_pc_sftp', which aliases to the command to log
+#   in to the SFTP shell on the server; the function 'my_pc_dl()', which
+#   allows you to easily download files from the server via SCP; and the
+#   function 'my_pc_ul()', which allows you to easily upload files to the
+#   server via SCP.
+function site_setup() {
+    # create the site_ip, site_uname and site_port variables
+    eval "${1}_ip=\"$2\""
+    eval "${1}_uname=\"$3\""
+    eval "${1}_port=$4"
+
+    # create the site SSH alias, which is just the site name
+    eval "alias $1=\"ssh -p\$${1}_port \$${1}_uname@\$${1}_ip\""
+
+    # create the site SFTP alias, which will be called site_sftp
+    eval "alias ${1}_sftp=\"sftp -oPort=\$${1}_port \$${1}_uname@\$${1}_ip\""
+
+    # create the SCP download function, which will be called site_dl()
+    eval "function ${1}_dl() { scp_download $1 \"\$1\" \"\$2\"; }"
+
+    # create the SCP upload function, which will be called site_ul()
+    eval "function ${1}_ul() { scp_upload $1 \"\$1\" \"\$2\"; }"
+}
+
+# function for downloading via SCP
+# args:
+#   $1: site name
+#   $2: remote path to download
+#   $3: local path to save to (optional -- defaults to /tmp)
+function scp_download() {
+    local site
+    local remote_path
+    local local_path
+
+    if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
+
+    if [[ $2 ]]; then
+        remote_path="$2"
+    else
+        echo "Usage: ${site}_dl remote_path [local_path]"
+        return
+    fi
+
+    if [[ $3 ]]; then
+        local_path="$3"
+    else
+        local_path="/tmp"
+    fi
+
+    eval "scp -oPort=\$${site}_port \$${site}_uname@\$${site}_ip:\"$remote_path\" \"$local_path\""
+}
+
+# function for uploading via SCP
+# args:
+#   $1: site name
+#   $2: local path to upload
+#   $3: remote path to save to (optional -- defaults to /tmp)
+function scp_upload()
+{
+    local site
+    local local_path
+    local remote_path
+
+    if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
+
+    if [[ $2 ]]; then
+        local_path="$2"
+    else
+        echo "Usage: ${site}_ul local_path [remote_path]"
+        return
+    fi
+
+    if [[ $3 ]]; then
+        remote_path="$3"
+    else
+        remote_path="/tmp"
+    fi
+
+    eval "scp -oPort=\$${site}_port \"$local_path\" \$${site}_uname@\$${site}_ip:\"$remote_path\""
+}
+
 # source site-specific rc file, if it exists and is readable
 if [ -r ~/.bashrc-site ]
 then
     source ~/.bashrc-site
 fi
-
-unset varmunge
 
