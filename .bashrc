@@ -165,7 +165,7 @@ function scp_download() {
     if [[ $3 ]]; then
         local_path="$3"
     else
-        local_path="/tmp"
+        local_path="."
     fi
 
     eval "scp -oPort=\$${site}_port \$${site}_uname@\$${site}_ip:\"$remote_path\" \"$local_path\""
