@@ -101,14 +101,12 @@ set encoding=utf-8
 " enable the mouse in normal and visual mode
 set mouse=nv
 
-" choose a color scheme
+" choose a color scheme (set the ones we want in reverse order, and fail
+" silently if one doesn't exist)
+silent! :colorscheme desert
+silent! :colorscheme industry
 if $TERM =~ "256color$"
-    " if we're in a 256 color terminal, use this color scheme
-    :colorscheme wombat256mod
-elseif filereadable("$VIMRUNTIME/colors/industry.vim")
-    " choose this colorscheme if we don't have 256 colors (and if it's built-in
-    "   to the VIM installation)
-    :colorscheme industry
+    silent! :colorscheme wombat256mod
 endif
 syntax on
 
