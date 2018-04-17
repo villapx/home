@@ -1,41 +1,41 @@
 ! xterm color scheme made sometime in January 2017
 
 ! Main colors
-XTerm*foreground:  rgb:b6/ca/b6
-XTerm*background:  rgb:2f/2f/2f
-XTerm*cursorColor: rgb:b6/ca/b6
+xterm*foreground:  rgb:b6/ca/b6
+xterm*background:  rgb:2f/2f/2f
+xterm*cursorColor: rgb:b6/ca/b6
 
 ! Bold foreground
-XTerm*colorBD:     rgb:95/95/95
+xterm*colorBD:     rgb:95/95/95
 
 ! Black
-XTerm*color0:      rgb:2e/34/36
-XTerm*color8:      rgb:55/57/53
+xterm*color0:      rgb:2e/34/36
+xterm*color8:      rgb:55/57/53
 
 ! Red
-XTerm*color1:      rgb:cc/00/00
-XTerm*color9:      rgb:ef/29/29
+xterm*color1:      rgb:cc/00/00
+xterm*color9:      rgb:ef/29/29
 
 ! Green
-XTerm*color2:      rgb:91/e0/45
-XTerm*color10:     rgb:8a/e2/34
+xterm*color2:      rgb:91/e0/45
+xterm*color10:     rgb:8a/e2/34
 
 ! Yellow
-XTerm*color3:      rgb:c4/a0/00
-XTerm*color11:     rgb:fc/e9/4f
+xterm*color3:      rgb:c4/a0/00
+xterm*color11:     rgb:fc/e9/4f
 
 ! Blue
-XTerm*color4:      rgb:00/5f/db
-XTerm*color12:     rgb:72/9f/cf
+xterm*color4:      rgb:00/5f/db
+xterm*color12:     rgb:72/9f/cf
 
 ! Magenta
-XTerm*color5:      rgb:75/50/7b
-XTerm*color13:     rgb:ad/7f/a8
+xterm*color5:      rgb:75/50/7b
+xterm*color13:     rgb:ad/7f/a8
 
 ! Cyan
-XTerm*color6:      rgb:06/98/9a
-XTerm*color14:     rgb:34/e2/e2
+xterm*color6:      rgb:06/98/9a
+xterm*color14:     rgb:34/e2/e2
 
 ! White
-XTerm*color7:      rgb:d3/d7/cf
-XTerm*color15:     rgb:ee/ee/ec
+xterm*color7:      rgb:d3/d7/cf
+xterm*color15:     rgb:ee/ee/ec
