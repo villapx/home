@@ -8,9 +8,12 @@ export EDITOR=vim
 umask 2
 
 # configure the 'less' pager
+#   -F: automatically exit if the entire file fits in the current terminal
 #   -Q: turn off the terminal bell
 #   -R: allow ANSI color escape sequences to work
-export LESS="$LESS -Q -R"
+#   -S: chop long lines instead of wrapping them
+#   -X: don't de-initialize the terminal (e.g. clear it)
+export LESS="$LESS -FQRSX"
 
 # source site-specific bash_profile file, if it exists and is readable
 if [ -r ~/.bash_profile-site ]
