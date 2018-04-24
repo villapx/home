@@ -1,0 +1,6 @@
+" disable cursor blinking
+set guicursor+=a:blinkon0
+
+" t_vb gets reset when the GUI opens...turn it back off
+set t_vb=
+

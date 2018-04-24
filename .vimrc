@@ -14,6 +14,7 @@ Plugin 'VundleVim/Vundle.vim'
 
 " plugins
 Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'python-mode/python-mode'
 
@@ -32,8 +33,14 @@ let mapleader = " "
 " need to remap PythonMode 'breakpoint' keymap before we set the CtrlP hotkeys
 let g:pymode_breakpoint_bind = '<Leader>k'
 
+" NERDTree
+" Toggle the NERDTree file explorer
 noremap <Leader>n :NERDTreeToggle <CR>
+
+" CtrlP
+" open in file mode
 noremap <Leader>f :CtrlP <CR>
+" open in buffer mode
 noremap <Leader>b :CtrlPBuffer <CR>
 
 " toggle relative or non-relative line numbers
@@ -45,6 +52,18 @@ function! LineNumberToggle()
     endif
 endfunc
 noremap <Leader>l :call LineNumberToggle()<CR>
+
+" replace the current word with what's in register 0
+noremap <Leader>rw viw"0p
+
+" turn off highlighted search
+noremap <Leader>h :nohl<CR>
+
+" close any open preview window
+noremap <Leader>pc :pc<CR>
+
+" close any open help window
+noremap <Leader>hc :helpc<CR>
 
 " move the current line up or down
 nnoremap <C-S-k> ml:m-2<CR>`l:delm l<CR>
@@ -110,9 +129,6 @@ if $TERM =~ "256color$"
 endif
 syntax on
 
-" disable cursor blinking
-set guicursor+=a:blinkon0
-
 " highlight searches
 set hlsearch
 
@@ -135,8 +151,6 @@ set statusline=%<%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P
 set visualbell
 " then turn off visual bell
 set t_vb=
-" t_vb gets reset when the GUI opens...tell it to turn it back off
-au GUIEnter * set t_vb=
 
 " command window height = 2
 set cmdheight=2
