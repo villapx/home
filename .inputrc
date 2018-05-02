@@ -1,0 +1,5 @@
+# include the system-wide readline config file
+$include /etc/inputrc
+
+# enable the application keypad so the "del" key works in st
+set enable-keypad On
