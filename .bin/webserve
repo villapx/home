@@ -1,0 +1,24 @@
+#! /usr/bin/env python3
+
+# adapted from John Carter, https://stackoverflow.com/a/39801780/5689220
+
+import argparse
+import http.server
+import os
+import socketserver
+
+parser = argparse.ArgumentParser(description="Web server")
+parser.add_argument('-p', '--port', type=int, default=8080)
+parser.add_argument('path', nargs='?', default='.')
+args = parser.parse_args()
+
+os.chdir(args.path)
+
+handler = http.server.SimpleHTTPRequestHandler
+httpd = socketserver.TCPServer(("", args.port), handler)
+print("serving at port", args.port)
+try:
+    httpd.serve_forever()
+except KeyboardInterrupt:
+    httpd.server_close()
+    print()
