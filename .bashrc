@@ -85,6 +85,9 @@ varmunge () {
     esac
 }
 
+# add to PATH
+varmunge PATH ~/.bin
+
 # function to create an SSH alias, an SFTP alias and SCP download and upload
 #   functions for an SSH server
 # args:
