@@ -1,2 +1,6 @@
 ! include Xresources file for each application
 #include ".Xresources.d/xterm"
+#include ".Xresources.d/urxvt"
+
+! include colorscheme for terminals
+#include ".Xresources.d/colorschemes/jvilla_solid"
