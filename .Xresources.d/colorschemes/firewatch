@@ -1,42 +1,39 @@
-! Author: Jeremy Villa
-! https://github.com/villapx
-
 ! Main colors
-XTerm*foreground:  rgb:9b/a2/b2
-XTerm*background:  rgb:1e/20/27
-XTerm*cursorColor: rgb:f6/f7/ec
+*foreground:  rgb:9b/a2/b2
+*background:  rgb:1e/20/27
+*cursorColor: rgb:f6/f7/ec
 
 ! Bold foreground
-XTerm*colorBD:     rgb:e6/e5/ff
+*colorBD:     rgb:e6/e5/ff
 
 ! Black
-XTerm*color0:      rgb:58/5f/6d
-XTerm*color8:      rgb:58/5f/6d
+*color0:      rgb:58/5f/6d
+*color8:      rgb:58/5f/6d
 
 ! Red
-XTerm*color1:      rgb:d9/53/60
-XTerm*color9:      rgb:d9/53/60
+*color1:      rgb:d9/53/60
+*color9:      rgb:d9/53/60
 
 ! Green
-XTerm*color2:      rgb:5a/b9/77
-XTerm*color10:     rgb:5a/b9/77
+*color2:      rgb:5a/b9/77
+*color10:     rgb:5a/b9/77
 
 ! Yellow
-XTerm*color3:      rgb:df/b5/63
-XTerm*color11:     rgb:df/b5/63
+*color3:      rgb:df/b5/63
+*color11:     rgb:df/b5/63
 
 ! Blue
-XTerm*color4:      rgb:4d/89/c4
-XTerm*color12:     rgb:4d/89/c4
+*color4:      rgb:4d/89/c4
+*color12:     rgb:4d/89/c4
 
 ! Magenta
-XTerm*color5:      rgb:d5/51/19
-XTerm*color13:     rgb:d5/51/19
+*color5:      rgb:d5/51/19
+*color13:     rgb:d5/51/19
 
 ! Cyan
-XTerm*color6:      rgb:44/a8/b6
-XTerm*color14:     rgb:44/a8/b6
+*color6:      rgb:44/a8/b6
+*color14:     rgb:44/a8/b6
 
 ! White
-XTerm*color7:      rgb:e6/e5/ff
-XTerm*color15:     rgb:e6/e5/ff
+*color7:      rgb:e6/e5/ff
+*color15:     rgb:e6/e5/ff
