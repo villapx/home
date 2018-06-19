@@ -66,6 +66,29 @@ then
         cyan="$(tput setaf 6)"
         white="$(tput setaf 7)"
     fi
+
+    # helper function to print out the colors
+    printcolors()
+    {
+        echo "${black}"             "black"         "${normal}"
+        echo "${bold}${black}"      "black bold"    "${normal}"
+        echo "${red}"               "red"           "${normal}"
+        echo "${bold}${red}"        "red bold"      "${normal}"
+        echo "${green}"             "green"         "${normal}"
+        echo "${bold}${green}"      "green bold"    "${normal}"
+        echo "${yellow}"            "yellow"        "${normal}"
+        echo "${bold}${yellow}"     "yellow bold"   "${normal}"
+        echo "${blue}"              "blue"          "${normal}"
+        echo "${bold}${blue}"       "blue bold"     "${normal}"
+        echo "${magenta}"           "magenta"       "${normal}"
+        echo "${bold}${magenta}"    "magenta bold"  "${normal}"
+        echo "${cyan}"              "cyan"          "${normal}"
+        echo "${bold}${cyan}"       "cyan bold"     "${normal}"
+        echo "${white}"             "white"         "${normal}"
+        echo "${bold}${white}"      "white bold"    "${normal}"
+    }
+else
+    printcolors() { echo "TERM not set"; }
 fi
 PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
 
