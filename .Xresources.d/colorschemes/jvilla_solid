@@ -9,15 +9,15 @@
 *colorBD:     rgb:95/95/95
 
 ! Black
-*color0:      rgb:2e/34/36
-*color8:      rgb:55/57/53
+*color0:      rgb:55/55/55
+*color8:      rgb:55/55/55
 
 ! Red
 *color1:      rgb:ef/29/29
 *color9:      rgb:ef/29/29
 
 ! Green
-*color2:      rgb:91/e0/45
+*color2:      rgb:8a/e2/34
 *color10:     rgb:8a/e2/34
 
 ! Yellow
@@ -37,5 +37,5 @@
 *color14:     rgb:34/e2/e2
 
 ! White
-*color7:      rgb:d3/d7/cf
+*color7:      rgb:ee/ee/ec
 *color15:     rgb:ee/ee/ec
