@@ -1,8 +1,10 @@
 # aliases
 alias cp="cp -i"
 alias datetime="date +%Y-%m-%d_%H%M%S"
+alias gitlogquick="git log --oneline --decorate -n15"
 alias grep="grep --color=auto"
 alias la="ls -la"
+alias makeprinttargets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}' | sort -u"
 alias mv="mv -i"
 alias psef="ps -ef"
 alias rm="rm -i"
