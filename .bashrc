@@ -92,7 +92,7 @@ then
 else
     printcolors() { echo "TERM not set"; }
 fi
-PS1="\[${bold}${yellow}\]\u\[${normal}\]@\h:\w $ "
+PS1="\[${bold}${cyan}\][\A] \[${green}\]\u\[${normal}\]@\h:\w $ "
 
 # function to avoid adding duplicate entries to the variable given in $1
 #   e.g.
