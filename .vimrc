@@ -55,9 +55,14 @@ noremap <Leader>l :call LineNumberToggle()<CR>
 
 " replace the current word with what's in register 0
 noremap <Leader>rw viw"0p
+noremap <Leader>rW viW"0p
 
 " turn off highlighted search
 noremap <Leader>h :nohl<CR>
+
+" search for the current visual selection
+vnoremap // y/<C-R>"<CR>
+vnoremap ?? y?<C-R>"<CR>
 
 " close any open preview window
 noremap <Leader>pc :pc<CR>
