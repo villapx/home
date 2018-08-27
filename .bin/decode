@@ -1,0 +1,79 @@
+#! /bin/bash
+
+################################################################################
+#
+# Decodes GSM, WCDMA or LTE RRC messages, as hexdumps, using tshark.
+#
+# Decodes GSM layer 3 messages (with the L2 pseudo length header),
+# WCDMA RRC System Information messages (i.e. MIB, SIB, SB), and the LTE
+# MIB and SIBs.
+#
+# Uses the "tshark" and "text2pcap" commands, both of which should be installed
+# when you install tshark using your OS' package manager.
+#
+# TODO:
+#   - Add GSM SMS (3GPP TS 23.040) decoding support
+#   - Investigate adding CDMA2000 layer 3 and SMS support
+#
+################################################################################
+
+usage()
+{
+    echo "Usage: decode tech [message-type] hex"
+    echo "    tech:         either gsm, umts/wcdma or lte."
+    echo "    message-type: only used for WCDMA and for the LTE MIB message."
+    echo "                  can be e.g. mib, sib1, sib2, sb1, etc."
+    echo ""
+    echo "Examples:"
+    echo "    decode gsm 5506198f018000000000000000000000000000b900006b"
+    echo ""
+    echo "    decode lte 684c46a6100190000065d146a184840c432203000000"
+    echo ""
+    echo "    decode lte mib a31000"
+    echo ""
+    echo "    decode umts sib1 e5c51108500b160014c1018bfe3aac3240"
+    exit 1
+}
+
+case "$1" in
+    gsm)
+        protocol="gsm_a_ccch"
+        hex="$2"
+        ;;
+    umts|wcdma)
+        case "$2" in
+            sib1|sib2|sib3|sib4|sib5|sib5bis|sib6|sib7|sib8|\
+                    sib9|sib10|sib11|sib11bis|sib12|sib13|\
+                    sib13-1|sib13-2|sib13-3|sib13-4|sib14|sib15|\
+                    sib15bis|sib15-1|sib15-1bis|sib15-2|sib15-2bis|\
+                    sib15-3|sib15-3bis|sib15-4|sib15-5|sib15-6|\
+                    sib15-7|sib15-8|sib16|sib17|sib18|sib19|\
+                    mib|sb1|sb2)
+                protocol="rrc.si.${2}"
+                hex="$3"
+                ;;
+            *)
+                usage
+                ;;
+        esac;
+        ;;
+    lte)
+        if [[ "$2" == "mib" ]]; then
+            protocol="lte-rrc.bcch.bch"
+            hex="$3"
+        else
+            protocol="lte-rrc.bcch.dl.sch"
+            hex="$2"
+        fi
+        ;;
+    *)
+        usage
+        ;;
+esac;
+
+# convert the hex into a format that text2pcap understands
+hex="000000 $(echo $hex | sed 's_.\{2\}_& _g')"
+
+tshark -V \
+    -o "uat:user_dlts:\"User 0 (DLT=147)\",\"${protocol}\",\"0\",\"\",\"0\",\"\"" \
+    -r <(text2pcap -D -l 147 <(echo $hex) -)
