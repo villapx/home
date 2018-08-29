@@ -97,7 +97,8 @@ PS1="\[${bold}${cyan}\][\A] \[${green}\]\u\[${normal}\]@\h:\w $ "
 # function to avoid adding duplicate entries to the variable given in $1
 #   e.g.
 #     varmunge PATH ~/bin after
-varmunge () {
+varmunge ()
+{
     case ":${!1}:" in
         *:"$2":*)
             ;;
@@ -130,7 +131,8 @@ varmunge PATH ~/.bin
 #   allows you to easily download files from the server via SCP; and the
 #   function 'my_pc_ul()', which allows you to easily upload files to the
 #   server via SCP.
-function site_setup() {
+function site_setup()
+{
     # create the site_ip, site_uname and site_port variables
     eval "${1}_ip=\"$2\""
     eval "${1}_uname=\"$3\""
@@ -154,7 +156,8 @@ function site_setup() {
 #   $1: site name
 #   $2: remote path to download
 #   $3: local path to save to (optional -- defaults to /tmp)
-function scp_download() {
+function scp_download()
+{
     local site
     local remote_path
     local local_path
