@@ -8,6 +8,7 @@ alias makeprinttargets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/
 alias mv="mv -i"
 alias psef="ps -ef"
 alias rm="rm -i"
+alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
 
 # don't put duplicate consecutive commands in the history
 HISTCONTROL=ignoredups
