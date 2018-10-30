@@ -92,18 +92,23 @@ inoremap <S-tab> <C-d>
 
 """ non-basic settings """
 
-" CtrlP settings
+"" CtrlP settings
 let g:ctrlp_arg_map = 1
 
-" NERDTree settings
+"" NERDTree settings
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden = 1
 
-" PythonMode settings
-let g:pymode_folding = 0                " disable automatic code folding
-let g:pymode_options_colorcolumn = 0    " disable coloring the 80th column
+"" PythonMode settings
+" disable automatic code folding
+let g:pymode_folding = 0
+" disable coloring the 80th column
+let g:pymode_options_colorcolumn = 0
+" relax the McCabe complexity checking so it doesn't flag the canonical
+"  'for line in fileinput.input()' loop
+let g:pymode_lint_options_mccabe = { 'complexity': 21 }
 
-" flag trailing whitespace in programming language files
+"" flag trailing whitespace in programming language files
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
 
@@ -150,7 +155,7 @@ set autoindent
 " always display status line, even if only one window is displayed
 set laststatus=2
 " status line format
-set statusline=%<%f\ %h%w%m%r%=%-14.(%l,%c%V%)\ %P
+set statusline=%<%f\ %h%w%m%r%=%b\ 0x%B\ \ %-14.(%l,%c%V%)\ %P
 
 " use visual bell instead of beeping when doing something wrong
 set visualbell
