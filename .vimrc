@@ -139,6 +139,10 @@ if $TERM =~ "256color$"
 endif
 syntax on
 
+" display tab characters
+set list
+set listchars=tab:>-
+
 " highlight searches
 set hlsearch
 
