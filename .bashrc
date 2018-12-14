@@ -146,68 +146,59 @@ function site_setup()
     eval "alias ${1}_sftp=\"sftp -oPort=\$${1}_port \$${1}_uname@\$${1}_ip\""
 
     # create the SCP download function, which will be called site_dl()
-    eval "function ${1}_dl() { scp_download $1 \"\$1\" \"\$2\"; }"
+    eval "function ${1}_dl() { scp_download $1 \"\$@\"; }"
 
     # create the SCP upload function, which will be called site_ul()
-    eval "function ${1}_ul() { scp_upload $1 \"\$1\" \"\$2\"; }"
+    eval "function ${1}_ul() { scp_upload $1 \"\$@\"; }"
 }
 
 # function for downloading via SCP
-# args:
-#   $1: site name
-#   $2: remote path to download
-#   $3: local path to save to (optional -- defaults to /tmp)
+#   - first arg: site name
+#   - second through $#-1: remote paths to download
+#   - final arg: destination arg for scp command
 function scp_download()
 {
     local site
-    local remote_path
-    local local_path
+    local cmd
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
-    if [[ $2 ]]; then
-        remote_path="$2"
-    else
-        echo "Usage: ${site}_dl remote_path [local_path]"
+    if [[ $# < 3 ]]; then
+        echo "Usage: ${site}_dl remote_path [remote_path ...] dest"
         return
     fi
 
-    if [[ $3 ]]; then
-        local_path="$3"
-    else
-        local_path="."
-    fi
+    cmd="scp -oPort=\$${site}_port"
 
-    eval "scp -oPort=\$${site}_port \$${site}_uname@\$${site}_ip:\"$remote_path\" \"$local_path\""
+    for path in "${@:2:$#-2}"; do
+        cmd+=" \$${site}_uname@\$${site}_ip:\"$path\""
+    done
+
+    eval "$cmd \"${@:$#}\""
 }
 
 # function for uploading via SCP
-# args:
-#   $1: site name
-#   $2: local path to upload
-#   $3: remote path to save to (optional -- defaults to /tmp)
+#   - first arg: site name
+#   - second through $#-1: local paths to upload
+#   - last arg: remote path to save to
 function scp_upload()
 {
     local site
-    local local_path
-    local remote_path
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
-    if [[ $2 ]]; then
-        local_path="$2"
-    else
-        echo "Usage: ${site}_ul local_path [remote_path]"
+    if [[ $# < 3 ]]; then
+        echo "Usage: ${site}_ul local_path [local_path ...] remote_path"
         return
     fi
 
-    if [[ $3 ]]; then
-        remote_path="$3"
-    else
-        remote_path="/tmp"
-    fi
+    cmd="scp -oPort=\$${site}_port"
 
-    eval "scp -oPort=\$${site}_port \"$local_path\" \$${site}_uname@\$${site}_ip:\"$remote_path\""
+    for path in "${@:2:$#-2}"; do
+        cmd+=" \"$path\""
+    done
+
+    eval "$cmd \$${site}_uname@\$${site}_ip:\"${@:$#}\""
 }
 
 # source site-specific rc file, if it exists and is readable
