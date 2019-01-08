@@ -113,7 +113,7 @@ varmunge ()
 }
 
 # add to PATH
-varmunge PATH ~/.bin
+varmunge PATH ~/.local/bin
 
 # function to create an SSH alias, an SFTP alias and SCP download and upload
 #   functions for an SSH server
