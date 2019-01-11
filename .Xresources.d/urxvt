@@ -1,5 +1,5 @@
 URxvt.font: xft:Bitstream Vera Sans Mono:pixelsize=14
 URxvt.scrollBar: False
 
-/* so that underscores aren't hidden */
+! so that underscores aren't hidden
 URxvt.lineSpace: 1
