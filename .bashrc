@@ -163,7 +163,7 @@ function scp_download()
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
-    if [[ $# < 3 ]]; then
+    if [[ $# -lt 3 ]]; then
         echo "Usage: ${site}_dl remote_path [remote_path ...] dest"
         return
     fi
@@ -187,7 +187,7 @@ function scp_upload()
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
-    if [[ $# < 3 ]]; then
+    if [[ $# -lt 3 ]]; then
         echo "Usage: ${site}_ul local_path [local_path ...] remote_path"
         return
     fi
