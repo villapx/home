@@ -58,7 +58,7 @@ noremap <Leader>rw viw"0p
 noremap <Leader>rW viW"0p
 
 " turn off highlighted search
-noremap <Leader>h :nohl<CR>
+noremap <Leader>hn :nohl<CR>
 
 " search for the current visual selection
 vnoremap // y/<C-R>"<CR>
@@ -68,7 +68,11 @@ vnoremap ?? y?<C-R>"<CR>
 noremap <Leader>pc :pc<CR>
 
 " close any open help window
-noremap <Leader>hc :helpc<CR>
+if(has("patch-7.4-449") || v:version == 704 && has("patch449"))
+    noremap <Leader>hc :helpc<CR>
+else
+    noremap <Leader>hc :echo ":helpc not introduced until patch 7.4-449"<CR>
+endif
 
 " move the current line up or down
 nnoremap <C-S-k> ml:m-2<CR>`l:delm l<CR>
