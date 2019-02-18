@@ -93,7 +93,14 @@ then
 else
     printcolors() { echo "TERM not set"; }
 fi
-PS1="\[${bold}${cyan}\][\A] \[${green}\]\u\[${normal}\]@\h:\w $ "
+PS1="${incognito}\[${bold}${cyan}\][\A] \[${green}\]\u\[${normal}\]@\h:\w $ "
+
+# function to go into an "incognito" shell, where no history is saved
+incognito ()
+{
+    export incognito="\[${red}\][inc] \[${normal}\]"
+    HISTFILE=/dev/null bash
+}
 
 # function to avoid adding duplicate entries to the variable given in $1
 #   e.g.
