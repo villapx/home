@@ -11,7 +11,13 @@ alias rm="rm -i"
 alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
 
 HISTCONTROL=ignoredups
-HISTSIZE=-1
+if [[ ${BASH_VERSINFO[0]} -gt 4 || (${BASH_VERSINFO[0]} -eq 4 && ${BASH_VERSINFO[1]} -ge 3) ]]
+then
+    HISTSIZE=-1
+else
+    HISTSIZE=
+    HISTFILESIZE=
+fi
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
