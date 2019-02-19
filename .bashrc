@@ -10,12 +10,8 @@ alias psef="ps -ef"
 alias rm="rm -i"
 alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
 
-# don't put duplicate consecutive commands in the history
 HISTCONTROL=ignoredups
-
-# history length in the shell and in the .bash_history file
-HISTSIZE=1000
-HISTFILESIZE=2000
+HISTSIZE=-1
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
