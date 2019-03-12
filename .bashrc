@@ -38,6 +38,9 @@ command -v dircolors >/dev/null 2>&1 &&
         alias ls="ls --color=auto";
     }
 
+# make the 'gpg' command use the TTY for password input
+export GPG_TTY=$(tty)
+
 # gnome-terminal and mate-terminal don't set the TERM variable to xterm-256color,
 #   though they do support 256 colors. we can check the COLORTERM variable to
 #   see if we're in one of those terminals and set TERM accordingly
