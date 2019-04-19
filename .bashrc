@@ -10,7 +10,7 @@ alias psef="ps -ef"
 alias rm="rm -i"
 alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
 
-HISTCONTROL=ignoredups
+HISTCONTROL=ignoreboth
 if [[ ${BASH_VERSINFO[0]} -gt 4 || (${BASH_VERSINFO[0]} -eq 4 && ${BASH_VERSINFO[1]} -ge 3) ]]
 then
     HISTSIZE=-1
