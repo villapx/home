@@ -34,8 +34,8 @@ fi
 # enable color support for ls if it's available
 command -v dircolors >/dev/null 2>&1 &&
     {
-        eval "$(dircolors)" >/dev/null 2>&1;
-        alias ls="ls --color=auto";
+        eval "$(dircolors | sed -E 's_:ow=[0-9;]+:_:ow=01;07;34:_')"
+        alias ls="ls --color=auto"
     }
 
 # make the 'gpg' command use the TTY for password input
