@@ -3,3 +3,7 @@ URxvt.scrollBar: False
 
 ! so that underscores aren't hidden
 URxvt.lineSpace: 1
+
+! add │ ("box drawings light vertical", U+2502) to cutchars, because of tmux borders
+! (ignore the xrdb warnings, the resource still works)
+URxvt.cutchars: \ `"'&()*,;<=>?@[]^{|}│
