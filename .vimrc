@@ -117,6 +117,9 @@ let g:pymode_lint_options_mccabe = { 'complexity': 21 }
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
 
+"" open different types of files as zip files
+autocmd BufReadCmd *.nupkg call zip#Browse(expand("<amatch>"))
+
 
 
 """ basic VIM settings """
