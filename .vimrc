@@ -182,6 +182,10 @@ set expandtab
 " display line numbers
 set number
 
+" use BASH-style command line completion (longest,list), and cycle through
+" available options on additional TAB presses (full)
+set wildmode=longest,list,full
+
 " source site-specific vimrc file
 if filereadable("~/.vimrc-site")
     source ~/.vimrc-site
