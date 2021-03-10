@@ -27,6 +27,11 @@ filetype plugin indent on
 
 
 
+""" Enable built-in plugins """
+packadd! matchit
+
+
+
 """ keymaps """
 
 let mapleader = " "
