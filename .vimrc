@@ -197,6 +197,10 @@ set number
 " available options on additional TAB presses (full)
 set wildmode=longest,list,full
 
+" open new splits to the right (vsp) or bottom (sp)
+set splitright
+set splitbelow
+
 " source site-specific vimrc file
 if filereadable("~/.vimrc-site")
     source ~/.vimrc-site
