@@ -49,6 +49,9 @@ noremap <Leader>f :CtrlP <CR>
 " open in buffer mode
 noremap <Leader>b :CtrlPBuffer <CR>
 
+" Python-mode
+let g:pymode_options_max_line_length = 100
+
 " toggle relative or non-relative line numbers
 function! LineNumberToggle()
     if(&relativenumber == 1)
