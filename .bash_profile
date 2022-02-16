@@ -7,6 +7,25 @@ export EDITOR=vim
 # prevent "others" from getting write permission on created files
 umask 2
 
+# function to avoid adding duplicate entries to the variable given in $1
+#   e.g.
+#     varmunge PATH ~/.local/bin after
+varmunge ()
+{
+    case ":${!1}:" in
+        *:"$2":*)
+            ;;
+        *)
+            if [[ "$3" = "after" ]]; then
+                eval "$1=\${$1:+\$$1:}$2"
+            else
+                eval "$1=$2\${$1:+:\$$1}"
+            fi
+    esac
+}
+
+varmunge PATH ~/.local/bin
+
 # source site-specific bash_profile file, if it exists and is readable
 if [[ -r ~/.bash_profile-site ]]
 then
