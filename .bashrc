@@ -109,26 +109,6 @@ incognito ()
     HISTFILE=/dev/null bash
 }
 
-# function to avoid adding duplicate entries to the variable given in $1
-#   e.g.
-#     varmunge PATH ~/bin after
-varmunge ()
-{
-    case ":${!1}:" in
-        *:"$2":*)
-            ;;
-        *)
-            if [ "$3" = "after" ] ; then
-                eval "${1}=\$${1}:$2"
-            else
-                eval "${1}=$2:\$${1}"
-            fi
-    esac
-}
-
-# add to PATH
-varmunge PATH ~/.local/bin
-
 # function to create an SSH alias, an SFTP alias and SCP download and upload
 #   functions for an SSH server
 # args:
