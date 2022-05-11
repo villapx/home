@@ -1,0 +1,31 @@
+# To use common configuration in %APPDATA%\mintty, simply remove this file
+Term=xterm-256color
+BellType=0
+CursorType=block
+CursorBlinks=no
+Font=Bitstream Vera Sans Mono
+FontHeight=10
+ScrollbackLines=0
+Scrollbar=none
+BoldAsFont=yes
+AllowBlinking=yes
+
+ForegroundColour=182,202,182
+BackgroundColour=47,47,47
+CursorColour=182,202,182
+Black=85,85,85
+BoldBlack=85,85,85
+Red=239,41,41
+BoldRed=239,41,41
+Green=138,226,52
+BoldGreen=138,226,52
+Yellow=196,160,0
+BoldYellow=252,233,79
+Blue=114,159,207
+BoldBlue=114,159,207
+Magenta=173,127,168
+BoldMagenta=173,127,168
+Cyan=52,226,226
+BoldCyan=52,226,226
+White=238,238,236
+BoldWhite=238,238,236
