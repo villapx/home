@@ -18,6 +18,7 @@ Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'python-mode/python-mode'
+Plugin 'hashivim/vim-terraform'
 
 " color schemes
 Plugin 'michalbachowski/vim-wombat256mod'
