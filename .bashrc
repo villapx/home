@@ -3,7 +3,7 @@ alias awkremovedups="awk '!seen[\$0]++'"
 alias cp="cp -i"
 alias datetime="date +%Y-%m-%d_%H%M%S"
 alias gitlogquick="git log --oneline --decorate -n15"
-alias gitupdaterpo="git pull && git submodule update && git remote prune origin && git submodule foreach 'git remote prune origin'"
+alias gitupdaterpo="git pull && git submodule update --recursive && git remote prune origin && git submodule foreach 'git remote prune origin'"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias makeprinttargets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}' | sort -u"
@@ -200,3 +200,5 @@ then
     source ~/.bashrc-site
 fi
 
+export PATH=/usr/local/cuda/bin${PATH:+:${PATH}}
+export LD_LIBRARY_PATH=/usr/local/cuda/lib64:/usr/local/lib:/usr/lib/path-robotics_arm${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
