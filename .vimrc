@@ -202,6 +202,9 @@ set wildmode=longest,list,full
 set splitright
 set splitbelow
 
+" insert only one space after period/exclamation mark/question mark
+set nojoinspaces
+
 " source site-specific vimrc file
 if filereadable("~/.vimrc-site")
     source ~/.vimrc-site
