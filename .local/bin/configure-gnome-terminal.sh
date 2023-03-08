@@ -113,3 +113,40 @@ set_key "$profile_schema" 'use-theme-colors'                "false"
 set_key "$profile_schema" 'use-theme-transparency'          "false"
 set_key "$profile_schema" 'use-transparent-background'      "false"
 set_key "$profile_schema" 'visible-name'                    "'$(whoami)'"
+
+
+# set keybindings
+keybindings_schema="org.gnome.Terminal.Legacy.Keybindings:/org/gnome/terminal/legacy/keybindings/"
+set_key "$keybindings_schema" 'close-tab'       '<Ctrl><Shift>w'
+set_key "$keybindings_schema" 'close-window'    '<Ctrl><Shift>q'
+set_key "$keybindings_schema" 'copy'            '<Ctrl><Shift>c'
+set_key "$keybindings_schema" 'copy-html'       'disabled'
+set_key "$keybindings_schema" 'detach-tab'      'disabled'
+set_key "$keybindings_schema" 'export'          'disabled'
+set_key "$keybindings_schema" 'find'            'disabled'
+set_key "$keybindings_schema" 'find-clear'      'disabled'
+set_key "$keybindings_schema" 'find-next'       'disabled'
+set_key "$keybindings_schema" 'find-previous'   'disabled'
+set_key "$keybindings_schema" 'full-screen'     'F11'
+set_key "$keybindings_schema" 'help'            'disabled'
+set_key "$keybindings_schema" 'move-tab-left'   '<Ctrl><Shift>Page_Up'
+set_key "$keybindings_schema" 'move-tab-right'  '<Ctrl><Shift>Page_Down'
+set_key "$keybindings_schema" 'new-tab'         '<Ctrl><Shift>t'
+set_key "$keybindings_schema" 'new-window'      '<Ctrl><Shift>n'
+set_key "$keybindings_schema" 'next-tab'        '<Control>Page_Down'
+set_key "$keybindings_schema" 'paste'           '<Ctrl><Shift>v'
+set_key "$keybindings_schema" 'preferences'     'disabled'
+set_key "$keybindings_schema" 'prev-tab'        '<Control>Page_Up'
+set_key "$keybindings_schema" 'print'           'disabled'
+set_key "$keybindings_schema" 'read-only'       'disabled'
+set_key "$keybindings_schema" 'reset'           'disabled'
+set_key "$keybindings_schema" 'reset-and-clear' 'disabled'
+set_key "$keybindings_schema" 'save-contents'   'disabled'
+set_key "$keybindings_schema" 'select-all'      'disabled'
+set_key "$keybindings_schema" 'toggle-menubar'  'disabled'
+set_key "$keybindings_schema" 'zoom-in'         '<Ctrl>plus'
+set_key "$keybindings_schema" 'zoom-normal'     '<Ctrl>0'
+set_key "$keybindings_schema" 'zoom-out'        '<Ctrl>minus'
+for i in $(seq 1 35) last; do
+    set_key "$keybindings_schema" "switch-to-tab-${i}" 'disabled'
+done
