@@ -77,13 +77,6 @@ vnoremap ?? y?<C-R>"<CR>
 " close any open preview window
 noremap <Leader>pc :pc<CR>
 
-" close any open help window
-if(has("patch-7.4-449") || v:version == 704 && has("patch449"))
-    noremap <Leader>hc :helpc<CR>
-else
-    noremap <Leader>hc :echo ":helpc not introduced until patch 7.4-449"<CR>
-endif
-
 " move the current line up or down
 nnoremap <C-S-k> ml:m-2<CR>`l:delm l<CR>
 nnoremap <C-S-j> ml:m+<CR>`l:delm l<CR>
