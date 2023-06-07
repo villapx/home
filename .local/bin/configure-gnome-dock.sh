@@ -22,3 +22,6 @@ set_dock_key    dock-position           BOTTOM
 set_dock_key    extend-height           false
 
 set_dock_key    show-show-apps-button   false
+
+# show on all monitors
+set_dock_key    multi-monitor           true
