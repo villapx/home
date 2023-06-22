@@ -29,3 +29,5 @@ Cyan=52,226,226
 BoldCyan=52,226,226
 White=238,238,236
 BoldWhite=238,238,236
+Columns=160
+Rows=60
