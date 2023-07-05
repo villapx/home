@@ -1,0 +1,12 @@
+{
+    "files.insertFinalNewline": true,
+    "vim.vimrc.enable": true,
+    "workbench.colorTheme": "Default Dark Modern",
+
+    "[tf]": {
+        "editor.tabSize": 2
+    },
+    "[yaml]": {
+        "editor.tabSize": 2
+    }
+}
