@@ -1,6 +1,10 @@
 {
     "files.insertFinalNewline": true,
+
+    "vim.joinspaces": false,
+    "vim.textwidth": 100,
     "vim.vimrc.enable": true,
+
     "workbench.colorTheme": "Default Dark Modern",
 
     "[tf]": {
