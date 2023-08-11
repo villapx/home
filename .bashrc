@@ -21,6 +21,12 @@ else
     HISTFILESIZE=
 fi
 
+BC=/usr/share/bash-completion/bash_completion
+if [[ -r "$BC" ]]
+then
+    source "$BC"
+fi
+
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
 if [[ -x /usr/bin/lesspipe ]]
