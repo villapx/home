@@ -2,12 +2,12 @@
 alias awkremovedups="awk '!seen[\$0]++'"
 alias cp="cp -i"
 alias datetime="date +%Y-%m-%d_%H%M%S"
-alias gitlogquick="git log --oneline --decorate -n15"
+alias gitlogquick="git log --oneline --decorate --graph -n15"
 alias gitupdaterpo="git pull && git submodule update --recursive && git remote prune origin && git submodule foreach --recursive 'git remote prune origin'"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
 alias diff="diff --color=auto"
-alias makeprinttargets="make -qp | awk -F':' '/^[a-zA-Z0-9][^$#\/\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}' | sort -u"
+alias makeprinttargets="make -qp | awk -F: '/^[a-zA-Z0-9][^\$#\\/\\t=]*:([^=]|$)/ {split(\$1,A,/ /);for(i in A)print A[i]}' | sort -u"
 alias mv="mv -i"
 alias rm="rm -i"
 alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
@@ -47,7 +47,7 @@ command -v dircolors >/dev/null 2>&1 &&
     }
 
 # make the 'gpg' command use the TTY for password input
-export GPG_TTY=$(tty)
+export GPG_TTY="$(tty)"
 
 # gnome-terminal and mate-terminal don't set the TERM variable to xterm-256color,
 #   though they do support 256 colors. we can check the COLORTERM variable to
@@ -64,10 +64,10 @@ case "$COLORTERM" in
 esac
 
 # set prompt
-if [[ $TERM ]]
+if [[ -n "$TERM" ]]
 then
-    ncolors=$(tput colors)
-    if test -n "$ncolors" && test $ncolors -ge 8
+    ncolors="$(tput colors)"
+    if [[ -n "$ncolors" ]] && [[ "$ncolors" -ge 8 ]]
     then
         bold="$(tput bold)"
         underline="$(tput smul)"
@@ -202,7 +202,7 @@ function scp_upload()
 }
 
 # source site-specific rc file, if it exists and is readable
-if [ -r ~/.bashrc-site ]
+if [[ -r ~/.bashrc-site ]]
 then
     source ~/.bashrc-site
 fi
