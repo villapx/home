@@ -21,11 +21,17 @@ else
     HISTFILESIZE=
 fi
 
+
+# all about command completion
 BC=/usr/share/bash-completion/bash_completion
 if [[ -r "$BC" ]]
 then
     source "$BC"
 fi
+
+command -v kubectl &>/dev/null && source <(kubectl completion bash)
+command -v helm &>/dev/null && source <(helm completion bash)
+
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
@@ -39,15 +45,18 @@ then
     export LESSOPEN="|/usr/bin/lesspipe.sh %s"
 fi
 
+
 # enable color support for ls if it's available
-command -v dircolors >/dev/null 2>&1 &&
+command -v dircolors &>/dev/null &&
     {
         eval "$(dircolors | sed -E 's_:ow=[0-9;]+:_:ow=01;07;34:_')"
         alias ls="ls --color=auto"
     }
 
+
 # make the 'gpg' command use the TTY for password input
 export GPG_TTY="$(tty)"
+
 
 # gnome-terminal and mate-terminal don't set the TERM variable to xterm-256color,
 #   though they do support 256 colors. we can check the COLORTERM variable to
@@ -62,6 +71,7 @@ case "$COLORTERM" in
             export TERM=xterm-256color
         fi
 esac
+
 
 # set prompt
 if [[ -n "$TERM" ]]
@@ -114,6 +124,38 @@ incognito ()
     export incognito="\[${red}\][inc] \[${normal}\]"
     HISTFILE=/dev/null bash
 }
+
+
+# function for "update all"
+function upd()
+{
+    local post_command=":"
+    if [[ "$1" == "r" ]] || [[ "$1" == "reboot" ]]; then
+        post_command="sudo reboot"
+    elif [[ "$1" == "p" ]] || [[ "$1" == "poweroff" ]]; then
+        post_command="sudo poweroff"
+    elif [[ -n "$1" ]]; then
+        echo "Usage: upd [r|reboot|p|poweroff]"
+        return 255
+    fi
+
+    local update_cmd
+    if [[ -n "$(command -v apt)" ]]; then
+        update_cmd="sudo bash -c 'apt update && apt -y dist-upgrade && apt -y autoremove'"
+    else
+        echo "Detected an unsupported system. Add support for this system's package manager"
+        return 1
+    fi
+
+    if [[ -n "$(command -v snap)" ]]; then
+        update_cmd+=" && sudo snap refresh"
+    fi
+
+    cmd="${update_cmd} && ${post_command}"
+    echo "$cmd"
+    eval "$cmd"
+}
+
 
 # function to create an SSH alias, an SFTP alias and SCP download and upload
 #   functions for an SSH server
@@ -200,6 +242,7 @@ function scp_upload()
 
     eval "$cmd \$${site}_uname@\$${site}_ip:\"${@:$#}\""
 }
+
 
 # source site-specific rc file, if it exists and is readable
 if [[ -r ~/.bashrc-site ]]
