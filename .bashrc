@@ -24,8 +24,7 @@ fi
 
 # all about command completion
 BC=/usr/share/bash-completion/bash_completion
-if [[ -r "$BC" ]]
-then
+if [[ -r "$BC" ]]; then
     source "$BC"
 fi
 
@@ -35,13 +34,11 @@ command -v helm &>/dev/null && source <(helm completion bash)
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
-if [[ -x /usr/bin/lesspipe ]]
-then
+if [[ -x /usr/bin/lesspipe ]]; then
     eval "$(SHELL=/bin/sh lesspipe)"
 
 # otherwise look for lesspipe.sh (often found on RHEL and derivatives)
-elif [[ -x /usr/bin/lesspipe.sh ]]
-then
+elif [[ -x /usr/bin/lesspipe.sh ]]; then
     export LESSOPEN="|/usr/bin/lesspipe.sh %s"
 fi
 
@@ -74,11 +71,9 @@ esac
 
 
 # set prompt
-if [[ -n "$TERM" ]]
-then
+if [[ -n "$TERM" ]]; then
     ncolors="$(tput colors)"
-    if [[ -n "$ncolors" ]] && [[ "$ncolors" -ge 8 ]]
-    then
+    if [[ -n "$ncolors" ]] && [[ "$ncolors" -ge 8 ]]; then
         bold="$(tput bold)"
         underline="$(tput smul)"
         standout="$(tput smso)"
@@ -245,7 +240,6 @@ function scp_upload()
 
 
 # source site-specific rc file, if it exists and is readable
-if [[ -r ~/.bashrc-site ]]
-then
+if [[ -r ~/.bashrc-site ]]; then
     source ~/.bashrc-site
 fi

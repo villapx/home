@@ -27,8 +27,7 @@ varmunge ()
 varmunge PATH ~/.local/bin
 
 # source site-specific bash_profile file, if it exists and is readable
-if [[ -r ~/.bash_profile-site ]]
-then
+if [[ -r ~/.bash_profile-site ]]; then
     source ~/.bash_profile-site
 fi
 
