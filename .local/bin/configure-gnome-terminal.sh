@@ -2,6 +2,15 @@
 
 set -e
 
+
+# determine GNOME terminal version. the output looks something like:
+#    # GNOME Terminal 3.36.2 using VTE 0.60.3 +BIDI +GNUTLS +ICU +SYSTEMD
+versions=("$(gnome-terminal --version | sed -E 's_.*GNOME Terminal ([0-9]{1,2})\.([0-9]{1,3})\.([0-9]{1,3}) .*_\1 \2 \3_')")
+version_major="${versions[0]}"
+version_minor="${versions[1]}"
+version_patch="${versions[2]}"
+
+
 profiles_list_schema='org.gnome.Terminal.ProfilesList'
 profiles_list_key='list'
 
@@ -79,7 +88,6 @@ color15=$(get_color color15)
 # set all of the keys for my profile
 profile_schema="org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:${profile_uuid}/"
 
-set_key "$profile_schema" 'allow-bold'                      "true"
 set_key "$profile_schema" 'audible-bell'                    "false"
 set_key "$profile_schema" 'background-color'                "'$color_background'"
 set_key "$profile_schema" 'background-transparency-percent' "0"
@@ -93,7 +101,6 @@ set_key "$profile_schema" 'cursor-colors-set'               "true"
 set_key "$profile_schema" 'cursor-foreground-color'         "'$color_background'"
 set_key "$profile_schema" 'cursor-shape'                    "'block'"
 set_key "$profile_schema" 'custom-command'                  "''"
-set_key "$profile_schema" 'default-show-menubar'            "false"
 set_key "$profile_schema" 'delete-binding'                  "'delete-sequence'"
 set_key "$profile_schema" 'encoding'                        "'UTF-8'"
 set_key "$profile_schema" 'font'                            "'Bitstream Vera Sans Mono 11'"
@@ -113,6 +120,20 @@ set_key "$profile_schema" 'use-theme-colors'                "false"
 set_key "$profile_schema" 'use-theme-transparency'          "false"
 set_key "$profile_schema" 'use-transparent-background'      "false"
 set_key "$profile_schema" 'visible-name'                    "'$(whoami)'"
+
+# allow-bold was removed in 3.35
+if [[ "$version_major" -lt 3 ]] ||
+    ( [[ "$version_major" -eq 3 ]] && [[ "$version_minor" -lt 35 ]] )
+then
+    set_key "$profile_schema" 'allow-bold' "true"
+fi
+
+# default-show-menubar was removed in 3.31
+if [[ "$version_major" -lt 3 ]] ||
+    ( [[ "$version_major" -eq 3 ]] && [[ "$version_minor" -lt 31 ]] )
+then
+    set_key "$profile_schema" 'default-show-menubar' "false"
+fi
 
 
 # set keybindings
