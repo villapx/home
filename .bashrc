@@ -137,6 +137,10 @@ function upd()
     local update_cmd
     if [[ -n "$(command -v apt)" ]]; then
         update_cmd="sudo bash -c 'apt update && apt -y dist-upgrade && apt -y autoremove'"
+    elif [[ -n "$(command -v yay)" ]]; then
+        update_cmd="yay"
+    elif [[ -n "$(command -v pacman)" ]]; then
+        update_cmd="sudo pacman -Syu"
     else
         echo "Detected an unsupported system. Add support for this system's package manager"
         return 1
