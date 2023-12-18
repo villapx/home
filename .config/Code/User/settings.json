@@ -1,12 +1,17 @@
 {
     "files.insertFinalNewline": true,
+    "git.ignoreMissingGitWarning": true,
 
+    "vim.hlsearch": true,
     "vim.joinspaces": false,
     "vim.textwidth": 100,
     "vim.vimrc.enable": true,
 
     "workbench.colorTheme": "Default Dark Modern",
 
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.python"
+    },
     "[tf]": {
         "editor.tabSize": 2
     },
