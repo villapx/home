@@ -5,7 +5,7 @@ set -e
 
 # determine GNOME terminal version. the output looks something like:
 #    # GNOME Terminal 3.36.2 using VTE 0.60.3 +BIDI +GNUTLS +ICU +SYSTEMD
-versions=("$(gnome-terminal --version | sed -E 's_.*GNOME Terminal ([0-9]{1,2})\.([0-9]{1,3})\.([0-9]{1,3}) .*_\1 \2 \3_')")
+versions=($(gnome-terminal --version | sed -E 's_.*GNOME Terminal ([0-9]{1,2})\.([0-9]{1,3})\.([0-9]{1,3}) .*_\1 \2 \3_'))
 version_major="${versions[0]}"
 version_minor="${versions[1]}"
 version_patch="${versions[2]}"
