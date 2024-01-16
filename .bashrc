@@ -156,8 +156,8 @@ function upd()
 }
 
 
-# function to create an SSH alias, an SFTP alias and SCP download and upload
-#   functions for an SSH server
+# function to create an SSH alias, an SFTP alias and SCP download and upload functions for an
+#   SSH server
 # args:
 #   $1: name you'd like to give to the server, a.k.a. the "site name"
 #   $2: IP address or hostname of the server
@@ -167,12 +167,13 @@ function upd()
 # Example usage:
 #   site_setup my_pc 192.168.0.5 myusername 22
 #
-# That creates the alias 'my_pc', which aliases to the command to SSH into
-#   the server; the alias 'my_pc_sftp', which aliases to the command to log
-#   in to the SFTP shell on the server; the function 'my_pc_dl()', which
-#   allows you to easily download files from the server via SCP; and the
-#   function 'my_pc_ul()', which allows you to easily upload files to the
-#   server via SCP.
+# That creates the following:
+#   - The alias 'my_pc', which aliases to the command to SSH into the server
+#   - The function 'my_pc_portfwd()', which allows you to easily SSH into the server and specify
+#     ports to forward
+#   - The alias 'my_pc_sftp', which aliases to the command to log in to the SFTP shell on the server
+#   - The function 'my_pc_dl()', which allows you to easily download files from the server via SCP
+#   - The function 'my_pc_ul()', which allows you to easily upload files to the server via SCP.
 function site_setup()
 {
     # create the site_ip, site_uname and site_port variables
@@ -182,6 +183,9 @@ function site_setup()
 
     # create the site SSH alias, which is just the site name
     eval "alias $1=\"ssh -p\$${1}_port \$${1}_uname@\$${1}_ip\""
+
+    # create the SSH-with-port-forwards alias
+    eval "function ${1}_portfwd() { ssh_with_port_forwards $1 \"\$@\"; }"
 
     # create the site SFTP alias, which will be called site_sftp
     eval "alias ${1}_sftp=\"sftp -oPort=\$${1}_port \$${1}_uname@\$${1}_ip\""
@@ -193,6 +197,35 @@ function site_setup()
     eval "function ${1}_ul() { scp_upload $1 \"\$@\"; }"
 }
 
+# function for SSHing into the site, with -L/localhost port forwards
+#   - first arg: site name
+#   - second arg through $# or until `--`: TCP ports to forward
+#   - remaining args after `--`: args to `ssh` command
+function ssh_with_port_forwards()
+{
+    local site
+
+    if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
+
+    local cmd="${site}"
+
+    while [[ "$2" ]]; do
+        if [[ "$2" =~ ^[0-9]+$ ]]; then
+            cmd+=" -L${2}:localhost:${2}"
+            shift
+        elif [[ "$2" == "--" ]]; then
+            shift 2
+            cmd+=" \"\${@}\""
+            break
+        else
+            echo "Usage: ${site}_portfwd [port [port ...] [-- [command [args ...]]]]"
+            return
+        fi
+    done
+
+    eval "$cmd"
+}
+
 # function for downloading via SCP
 #   - first arg: site name
 #   - second through $#-1: remote paths to download
@@ -200,7 +233,6 @@ function site_setup()
 function scp_download()
 {
     local site
-    local cmd
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
@@ -209,7 +241,7 @@ function scp_download()
         return
     fi
 
-    cmd="scp -oPort=\$${site}_port"
+    local cmd="scp -oPort=\$${site}_port"
 
     for path in "${@:2:$#-2}"; do
         cmd+=" \$${site}_uname@\$${site}_ip:\"$path\""
@@ -233,7 +265,7 @@ function scp_upload()
         return
     fi
 
-    cmd="scp -oPort=\$${site}_port"
+    local cmd="scp -oPort=\$${site}_port"
 
     for path in "${@:2:$#-2}"; do
         cmd+=" \"$path\""
