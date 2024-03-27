@@ -1,7 +1,4 @@
-# use UTF-8 encoding
 export LANG=en_US.UTF-8
-
-# set important environment variables
 export EDITOR=vim
 
 # prevent "others" from getting write permission on created files
