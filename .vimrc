@@ -13,6 +13,7 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " plugins
+Plugin 'tsiemens/vim-aftercolors'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdtree'
