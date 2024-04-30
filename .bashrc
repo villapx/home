@@ -2,7 +2,7 @@
 alias awkremovedups="awk '!seen[\$0]++'"
 alias cp="cp -i"
 alias datetime="date +%Y-%m-%d_%H%M%S"
-alias gitlogquick="git log --oneline --decorate --graph -n15"
+alias gitlogquick="git log --pretty='format:%C(auto)%h %C(magenta)%as%C(auto)%d %s' --decorate --graph -n15"
 alias gitupdaterpo="git pull && git submodule update --recursive && git remote prune origin && git submodule foreach --recursive 'git remote prune origin'"
 alias grep="grep --color=auto"
 alias egrep="egrep --color=auto"
@@ -30,7 +30,7 @@ fi
 
 command -v kubectl &>/dev/null && source <(kubectl completion bash)
 command -v helm &>/dev/null && source <(helm completion bash)
-
+command -v terraform &>/dev/null && complete -C "$(which terraform)" terraform
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
