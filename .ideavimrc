@@ -1,1 +1,4 @@
 source ~/.vimrc
+
+" allow the IDE to perform language-specific line joins for the `J` command
+set ideajoin
