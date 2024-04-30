@@ -13,12 +13,13 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 
 " plugins
-Plugin 'tsiemens/vim-aftercolors'
+Plugin 'pearofducks/ansible-vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'vim-scripts/DoxygenToolkit.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'aklt/plantuml-syntax'
 Plugin 'python-mode/python-mode'
+Plugin 'tsiemens/vim-aftercolors'
 Plugin 'hashivim/vim-terraform'
 
 " color schemes
