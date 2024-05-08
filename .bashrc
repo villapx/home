@@ -55,21 +55,6 @@ command -v dircolors &>/dev/null &&
 export GPG_TTY="$(tty)"
 
 
-# gnome-terminal and mate-terminal don't set the TERM variable to xterm-256color,
-#   though they do support 256 colors. we can check the COLORTERM variable to
-#   see if we're in one of those terminals and set TERM accordingly
-#   (Note that COLORTERM is only set in gnome-terminal versions < 3.13. after
-#   that, VTE_VERSION is what should be relied on. but starting with VTE
-#   version 0.40, TERM is set to xterm256-color by default, so this becomes
-#   a non-issue at that point)
-case "$COLORTERM" in
-    "gnome-terminal" | "mate-terminal")
-        if [[ "$TERM" = "xterm" ]]; then
-            export TERM=xterm-256color
-        fi
-esac
-
-
 # set prompt
 if [[ -n "$TERM" ]]; then
     ncolors="$(tput colors)"
