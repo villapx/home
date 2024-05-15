@@ -23,6 +23,11 @@ varmunge ()
 
 varmunge PATH ~/.local/bin
 
+# rust/cargo
+if [[ -r "$HOME/.cargo/env" ]]; then
+    source "$HOME/.cargo/env"
+fi
+
 # source site-specific bash_profile file, if it exists and is readable
 if [[ -r ~/.bash_profile-site ]]; then
     source ~/.bash_profile-site
