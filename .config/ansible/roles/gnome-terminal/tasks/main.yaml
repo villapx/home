@@ -1,0 +1,9 @@
+- name: See if my custom GNOME Terminal profile exists
+  ansible.builtin.shell:
+    cmd: gsettings get org.gnome.Terminal.ProfilesList list
+  register: gnome_profiles
+
+- name: Run configuration script
+  when: "'aaaaaaaa' not in gnome_profiles"
+  ansible.builtin.shell:
+    cmd: "{{ ansible_facts.user_dir }}/.local/bin/configure-gnome-terminal.sh"
