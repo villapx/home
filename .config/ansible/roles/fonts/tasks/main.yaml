@@ -1,0 +1,18 @@
+# adapted from: https://docs.fedoraproject.org/en-US/quick-docs/fonts/
+
+- name: Install fontconfig
+  become: true
+  ansible.builtin.package:
+    name: fontconfig
+    state: present
+
+- name: Create user fonts dir
+  ansible.builtin.shell:
+    cmd: mkdir -p {{ fonts_dir }}
+    creates: "{{ fonts_dir }}"
+
+- include_tasks: install-nerd-font.yaml
+  loop: "{{ nerd_fonts.fonts }}"
+  loop_control:
+    loop_var: font
+    label: "{{ font.name }}"
