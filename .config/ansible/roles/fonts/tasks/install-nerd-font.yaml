@@ -1,0 +1,19 @@
+# this file is included in a loop, once per Nerd Font
+
+- name: Create font dir
+  ansible.builtin.file:
+    path: "{{ fonts_dir }}/{{ font.name }}"
+    state: directory
+
+- name: Download and extract font
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/ryanoasis/nerd-fonts/releases/download/{{ nerd_fonts.version }}/{{ font.name }}.zip
+    dest: "{{ fonts_dir }}/{{ font.name }}"
+    creates: "{{ fonts_dir }}/{{ font.name }}/{{ font.indicator_file }}"
+  register: download_font
+
+- name: Update font cache
+  when: download_font.changed
+  ansible.builtin.shell:
+    cmd: fc-cache
