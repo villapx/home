@@ -2,3 +2,4 @@
   roles:
     - fonts
     - gnome-terminal
+    - neovim
