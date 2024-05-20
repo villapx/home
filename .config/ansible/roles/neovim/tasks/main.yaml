@@ -12,14 +12,23 @@
     src: neovim-env.sh
     dest: /etc/profile.d/
 
-- name: Install ripgrep for telescope plugin
+- name: Install plugin dependencies
   become: true
-  ansible.builtin.apt:
-    state: present
-    deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+  block:
+    - name: Install ripgrep
+      ansible.builtin.apt:
+        deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+        state: present
 
-- name: Install fd for telescope plugin
-  become: true
-  ansible.builtin.apt:
-    state: present
-    deb: https://github.com/sharkdp/fd/releases/download/v10.1.0/fd_10.1.0_amd64.deb
+    - name: Install fd
+      ansible.builtin.apt:
+        deb: https://github.com/sharkdp/fd/releases/download/v10.1.0/fd_10.1.0_amd64.deb
+        state: present
+
+    - name: Prevent apt from updating dependency packages
+      loop:
+        - ripgrep
+        - fd
+      ansible.builtin.dpkg_selections:
+        name: "{{ item }}"
+        selection: hold
