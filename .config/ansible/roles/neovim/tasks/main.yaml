@@ -1,0 +1,25 @@
+- name: Download and extract neovim
+  become: true
+  ansible.builtin.unarchive:
+    remote_src: true
+    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
+    dest: /opt
+    creates: /opt/nvim-linux64/bin/nvim
+
+- name: Place environment file
+  become: true
+  ansible.builtin.copy:
+    src: neovim-env.sh
+    dest: /etc/profile.d/
+
+- name: Install ripgrep for telescope plugin
+  become: true
+  ansible.builtin.apt:
+    state: present
+    deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+
+- name: Install fd for telescope plugin
+  become: true
+  ansible.builtin.apt:
+    state: present
+    deb: https://github.com/sharkdp/fd/releases/download/v10.1.0/fd_10.1.0_amd64.deb
