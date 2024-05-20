@@ -1,0 +1,12 @@
+- name: git rpo alias
+  community.general.git_config:
+    scope: global
+    name: alias.rpo
+    value: remote prune origin
+
+- name: Don't show untracked files under home dir
+  community.general.git_config:
+    scope: local
+    repo: "{{ ansible_facts.user_dir }}"
+    name: status.showUntrackedFiles
+    value: "no"
