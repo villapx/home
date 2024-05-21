@@ -120,6 +120,10 @@ vim.keymap.set("n", "<Leader>fh", telescope.help_tags, {})
 -- show certain types of whitespace
 vim.cmd("set list")
 
+-- use case insensitive search, except when using capital letters
+vim.cmd("set ignorecase")
+vim.cmd("set smartcase")
+
 -- no terminal bell
 vim.cmd('set belloff=""')
 
