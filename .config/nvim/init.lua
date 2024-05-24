@@ -19,13 +19,21 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- set up plugins
+-- set up plugins.
+-- alphebetized by repo name (not repo owner)
 require("lazy").setup({
   {
     "romgrk/barbar.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
     },
+  },
+  {
+    "rebelot/kanagawa.nvim",
+    config = function()
+      require("kanagawa").setup({})
+      vim.cmd("colorscheme kanagawa-wave")
+    end,
   },
   {
     "nvim-lualine/lualine.nvim",
@@ -38,13 +46,6 @@ require("lazy").setup({
         --  },
         --},
       })
-    end,
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa").setup({})
-      vim.cmd("colorscheme kanagawa-wave")
     end,
   },
   {
@@ -68,14 +69,6 @@ require("lazy").setup({
     end,
   },
   {
-    "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "nvim-lua/plenary.nvim",
-    },
-  },
-  {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
     config = function()
@@ -95,6 +88,14 @@ require("lazy").setup({
         },
       })
     end,
+  },
+  {
+    "nvim-telescope/telescope.nvim",
+    tag = "0.1.6",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+      "nvim-lua/plenary.nvim",
+    },
   },
 })
 
