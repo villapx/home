@@ -1,3 +1,5 @@
+# vim: set filetype=bash :
+
 # aliases
 alias awkremovedups="awk '!seen[\$0]++'"
 alias cp="cp -i"

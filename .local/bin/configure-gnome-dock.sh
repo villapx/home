@@ -1,4 +1,5 @@
 #! /usr/bin/env bash
+# vim: set filetype=bash :
 
 #
 # These are the settings I needed to change for configuring the out-of-the-box GNOME dock in Ubuntu
