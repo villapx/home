@@ -1,5 +1,5 @@
 export LANG=en_US.UTF-8
-export EDITOR=vim
+export EDITOR=nvim
 
 BIN="$HOME/.local/bin"
 if ! echo $PATH | egrep --quiet "(^|:)$BIN($|:)" ; then
