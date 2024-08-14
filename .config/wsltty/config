@@ -1,9 +1,12 @@
-# To use common configuration in %APPDATA%\mintty, simply remove this file
+# Copy this file into: C:\\Users\<user>\AppData\Roaming\wsltty\
+#
+# Be sure to download the Nerd Font from https://www.nerdfonts.com/
+
 Term=xterm-256color
 BellType=0
 CursorType=block
 CursorBlinks=no
-Font=Bitstream Vera Sans Mono
+Font=BitstromWera Nerd Font
 FontHeight=10
 ScrollbackLines=0
 Scrollbar=none
