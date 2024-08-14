@@ -1,7 +1,7 @@
 # vim: set filetype=bash :
 
 export LANG=en_US.UTF-8
-export EDITOR=vim
+export EDITOR=nvim
 
 # prevent "others" from getting write permission on created files
 umask 2
