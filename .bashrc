@@ -186,31 +186,28 @@ function site_setup()
 
 # function for SSHing into the site, with -L/localhost port forwards
 #   - first arg: site name
-#   - second arg through $# or until `--`: TCP ports to forward
-#   - remaining args after `--`: args to `ssh` command
+#   - remaining args:
+#     if the arg is an integer: add `-L<arg>:localhost:<arg>` to the SSH command
+#     else: add the arg as-is to the SSH command
 function ssh_with_port_forwards()
 {
     local site
 
     if [[ $1 ]]; then site="$1"; else echo "you're doing it wrong"; return; fi
 
-    local cmd="${site}"
+    local cmd=("${site}")
 
     while [[ "$2" ]]; do
         if [[ "$2" =~ ^[0-9]+$ ]]; then
-            cmd+=" -L${2}:localhost:${2}"
+            cmd+=("-L${2}:localhost:${2}")
             shift
-        elif [[ "$2" == "--" ]]; then
-            shift 2
-            cmd+=" \"\${@}\""
-            break
         else
-            echo "Usage: ${site}_portfwd [port [port ...] [-- [command [args ...]]]]"
-            return
+            cmd+=("$2")
+            shift
         fi
     done
 
-    eval "$cmd"
+    eval "${cmd[@]}"
 }
 
 # function for downloading via SCP
