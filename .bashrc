@@ -33,6 +33,7 @@ fi
 command -v kubectl &>/dev/null && source <(kubectl completion bash)
 command -v helm &>/dev/null && source <(helm completion bash)
 command -v terraform &>/dev/null && complete -C "$(which terraform)" terraform
+command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
