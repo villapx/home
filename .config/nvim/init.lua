@@ -106,6 +106,7 @@ vim.g.mapleader = " "
 -- help with filetype detection
 vim.filetype.add({
   extension = {
+    launch = "xml",
     tf = "hcl",
     tfvars = "hcl",
   },
