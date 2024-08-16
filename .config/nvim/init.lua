@@ -57,6 +57,9 @@ require("lazy").setup({
     },
     config = true,
   },
+  --{
+  --  "neovim/nvim-lspconfig",
+  --},
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
@@ -84,6 +87,7 @@ require("lazy").setup({
       require("nvim-treesitter.configs").setup({
         ensure_installed = {
           "bash",
+          "c_sharp",
           "hcl",
           "lua",
           "markdown",
@@ -120,6 +124,18 @@ vim.filetype.add({
     tfvars = "hcl",
   },
 })
+
+
+-- LSP setup
+--local lspconfig = require("lspconfig")
+--lspconfig.csharp_ls.setup({})
+--lspconfig.terraformls.setup({
+--  filetypes = {
+--    "hcl",
+--    "terraform",
+--    "terraform-vars",
+--  },
+--})
 
 
 -- keymaps
