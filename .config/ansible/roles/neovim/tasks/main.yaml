@@ -1,28 +1,33 @@
-- name: Download and extract neovim
+- name: Remove nvim tarball installation
   become: true
-  ansible.builtin.unarchive:
-    remote_src: true
-    src: https://github.com/neovim/neovim/releases/latest/download/nvim-linux64.tar.gz
-    dest: /opt
-    creates: /opt/nvim-linux64/bin/nvim
+  ansible.builtin.file:
+    path: /opt/nvim-linux64
+    state: absent
 
-- name: Place environment file
+- name: Remove environment file
   become: true
-  ansible.builtin.copy:
-    src: neovim-env.sh
-    dest: /etc/profile.d/
+  ansible.builtin.file:
+    path: /etc/profile.d/neovim-env.sh
+    state: absent
+
+- name: Download appimage
+  become: true
+  ansible.builtin.get_url:
+    url: https://github.com/neovim/neovim/releases/download/v{{ neovim.version }}/nvim.appimage
+    dest: /usr/local/bin/nvim
+    mode: "0755"
 
 - name: Install plugin dependencies
   become: true
   block:
     - name: Install ripgrep
       ansible.builtin.apt:
-        deb: https://github.com/BurntSushi/ripgrep/releases/download/13.0.0/ripgrep_13.0.0_amd64.deb
+        deb: https://github.com/BurntSushi/ripgrep/releases/download/{{ neovim.ripgrep.version }}/ripgrep_{{ neovim.ripgrep.version }}{{ neovim.ripgrep.apt_pkg_version_suffix }}_amd64.deb
         state: present
 
     - name: Install fd
       ansible.builtin.apt:
-        deb: https://github.com/sharkdp/fd/releases/download/v10.1.0/fd_10.1.0_amd64.deb
+        deb: https://github.com/sharkdp/fd/releases/download/v{{ neovim.fd.version }}/fd_{{ neovim.fd.version }}_amd64.deb
         state: present
 
     - name: Prevent apt from updating dependency packages
