@@ -49,6 +49,15 @@ require("lazy").setup({
     end,
   },
   {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "sindrets/diffview.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+    config = true,
+  },
+  {
     "nvim-tree/nvim-tree.lua",
     version = "*",
     lazy = false,
