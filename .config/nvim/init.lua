@@ -142,6 +142,8 @@ vim.filetype.add({
 vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>")
 vim.keymap.set("n", "Y", "yy")
 
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
 local nvimtree = require("nvim-tree.api")
 vim.keymap.set("n", "<Leader>t", function() nvimtree.tree.toggle(); end)
 vim.keymap.set("n", "<Leader>T", function() nvimtree.tree.find_file({ open = true, focus = true, }); end)
