@@ -23,6 +23,13 @@ vim.opt.rtp:prepend(lazypath)
 -- alphebetized by repo name (not repo owner)
 require("lazy").setup({
   {
+    "emmanueltouzery/agitator.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  },
+  {
     "romgrk/barbar.nvim",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
@@ -157,6 +164,9 @@ vim.keymap.set("n", "<Leader>fh", telescope.help_tags, { noremap = true })
 
 local neogit = require("neogit")
 vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
+
+local agitator = require("agitator")
+vim.keymap.set("n", "<Leader>gb", agitator.git_blame, { noremap = true })
 
 
 -- show certain types of whitespace
