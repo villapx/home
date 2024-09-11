@@ -1,4 +1,5 @@
 {
+  "agitator.nvim": { "branch": "main", "commit": "b948e16bba75dc4a114d3416c8e836a8e5e4d006" },
   "barbar.nvim": { "branch": "master", "commit": "31b6951c53a59bccfa91bf3984ed1510a940c836" },
   "diffview.nvim": { "branch": "main", "commit": "4516612fe98ff56ae0415a259ff6361a89419b0a" },
   "kanagawa.nvim": { "branch": "master", "commit": "f491b0fe68fffbece7030181073dfe51f45cda81" },
