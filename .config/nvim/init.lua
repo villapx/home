@@ -139,20 +139,24 @@ vim.filetype.add({
 
 
 -- keymaps
-vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>")
-vim.keymap.set("n", "Y", "yy")
+vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>", { noremap = true })
+vim.keymap.set("n", "Y", "yy", { noremap = true })
 
-vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 local nvimtree = require("nvim-tree.api")
-vim.keymap.set("n", "<Leader>t", function() nvimtree.tree.toggle(); end)
-vim.keymap.set("n", "<Leader>T", function() nvimtree.tree.find_file({ open = true, focus = true, }); end)
+vim.keymap.set("n", "<Leader>t", function() nvimtree.tree.toggle(); end, { noremap = true })
+vim.keymap.set("n", "<Leader>T", function() nvimtree.tree.find_file({ open = true, focus = true, }); end, { noremap = true })
 
 local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<Leader>ff", telescope.find_files, {})
-vim.keymap.set("n", "<Leader>fg", telescope.live_grep, {})
-vim.keymap.set("n", "<Leader>fb", telescope.buffers, {})
-vim.keymap.set("n", "<Leader>fh", telescope.help_tags, {})
+vim.keymap.set("n", "<Leader>ff", telescope.find_files, { noremap = true })
+vim.keymap.set("n", "<Leader>fg", telescope.live_grep, { noremap = true })
+vim.keymap.set("n", "<Leader>fo", telescope.buffers, { noremap = true })
+vim.keymap.set("n", "<Leader>fb", telescope.git_branches, { noremap = true })
+vim.keymap.set("n", "<Leader>fh", telescope.help_tags, { noremap = true })
+
+local neogit = require("neogit")
+vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
 
 
 -- show certain types of whitespace
