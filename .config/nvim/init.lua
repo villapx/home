@@ -38,7 +38,13 @@ require("lazy").setup({
   {
     "rebelot/kanagawa.nvim",
     config = function()
-      require("kanagawa").setup({})
+      require("kanagawa").setup({
+        overrides = function(colors)
+          return {
+            LineNr = { fg = colors.palette.springViolet1 },
+          }
+        end,
+      })
       vim.cmd("colorscheme kanagawa-wave")
     end,
   },
