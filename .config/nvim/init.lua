@@ -175,6 +175,14 @@ local agitator = require("agitator")
 vim.keymap.set("n", "<Leader>gb", agitator.git_blame, { noremap = true })
 
 
+-- chdir to the nearest-ancestor directory of the currently-opened buffer that contains a '.git' directory
+local function get_git_root()
+  local dot_git_path = vim.fn.finddir(".git", ".;")
+  return vim.fn.fnamemodify(dot_git_path, ":h")
+end
+vim.api.nvim_create_user_command("Cdgit", function() vim.api.nvim_set_current_dir(get_git_root()); end, {})
+
+
 -- show certain types of whitespace
 vim.cmd("set list")
 
