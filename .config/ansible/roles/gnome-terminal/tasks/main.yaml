@@ -3,8 +3,9 @@
     cmd: gsettings get org.gnome.Terminal.ProfilesList list
   changed_when: false
   register: gnome_profiles
+  ignore_errors: true  # since this task fails anytime gnome-terminal isn't actually installed
 
 - name: Run configuration script
-  when: "'aaaaaaaa' not in gnome_profiles.stdout"
+  when: "gnome_profiles.rc == 0 and 'aaaaaaaa' not in gnome_profiles.stdout"
   ansible.builtin.shell:
     cmd: "{{ ansible_facts.user_dir }}/.local/bin/configure-gnome-terminal.sh"
