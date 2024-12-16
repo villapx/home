@@ -36,6 +36,18 @@ require("lazy").setup({
     },
   },
   {
+    "hrsh7th/cmp-buffer",
+  },
+  {
+    "hrsh7th/cmp-cmdline",
+  },
+  {
+    "hrsh7th/cmp-nvim-lsp",
+  },
+  {
+    "hrsh7th/cmp-path",
+  },
+  {
     "rebelot/kanagawa.nvim",
     config = function()
       require("kanagawa").setup({
@@ -70,9 +82,12 @@ require("lazy").setup({
     },
     config = true,
   },
-  --{
-  --  "neovim/nvim-lspconfig",
-  --},
+  {
+    "hrsh7th/nvim-cmp",
+  },
+  {
+    "neovim/nvim-lspconfig",
+  },
   {
     "nvim-tree/nvim-tree.lua",
     version = "*",
@@ -139,8 +154,53 @@ vim.filetype.add({
 })
 
 
--- LSP setup
---local lspconfig = require("lspconfig")
+-- nvim-cmp setup
+local cmp = require("cmp")
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.snippet.expand(args.body)
+    end,
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-j>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-k>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+    ['<CR>'] = cmp.mapping.confirm({ select = true }),
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+  }, {
+    { name = 'buffer' },
+  }),
+})
+
+-- use 'buffer' source for `/` and `?`
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- use 'cmdline' and 'path' source for `:`
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+-- set up lspconfig
+local lspconfig = require("lspconfig")
+local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+lspconfig.pyright.setup({
+  capabilities = cmp_nvim_lsp_capabilities
+})
 --lspconfig.csharp_ls.setup({})
 --lspconfig.terraformls.setup({
 --  filetypes = {

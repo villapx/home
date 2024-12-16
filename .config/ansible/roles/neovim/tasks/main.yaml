@@ -37,3 +37,8 @@
       ansible.builtin.dpkg_selections:
         name: "{{ item }}"
         selection: hold
+
+    - name: Install pyright language server
+      ansible.builtin.pip:
+        name: pyright
+        state: latest
