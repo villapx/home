@@ -165,9 +165,25 @@ cmp.setup({
   mapping = cmp.mapping.preset.insert({
     ['<C-j>'] = cmp.mapping.scroll_docs(-4),
     ['<C-k>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete(),
+
+    ['<C-Space>'] = function()
+      if cmp.visible() then
+        cmp.close()
+      else
+        cmp.mapping.complete()
+      end
+    end,
+
     ['<C-e>'] = cmp.mapping.abort(),
     ['<CR>'] = cmp.mapping.confirm({ select = true }),
+
+    ['<Tab>'] = function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end,
   }),
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
@@ -201,14 +217,14 @@ local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 lspconfig.pyright.setup({
   capabilities = cmp_nvim_lsp_capabilities
 })
---lspconfig.csharp_ls.setup({})
---lspconfig.terraformls.setup({
---  filetypes = {
---    "hcl",
---    "terraform",
---    "terraform-vars",
---  },
---})
+lspconfig.csharp_ls.setup({})
+lspconfig.terraformls.setup({
+  filetypes = {
+    "hcl",
+    "terraform",
+    "terraform-vars",
+  },
+})
 
 
 -- keymaps
