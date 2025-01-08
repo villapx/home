@@ -1,6 +1,6 @@
 neovim:
   # https://github.com/neovim/neovim/releases
-  version: 0.10.2
+  version: 0.10.3
 
   # https://github.com/BurntSushi/ripgrep/releases
   ripgrep:
