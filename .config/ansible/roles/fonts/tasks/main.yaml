@@ -6,6 +6,12 @@
     name: fontconfig
     state: present
 
+- name: Install unzip
+  become: true
+  ansible.builtin.package:
+    name: unzip
+    state: present
+
 - name: Create user fonts dir
   ansible.builtin.shell:
     cmd: mkdir -p {{ fonts_dir }}
