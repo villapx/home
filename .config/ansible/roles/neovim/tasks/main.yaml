@@ -1,14 +1,10 @@
-- name: Remove nvim tarball installation
+- name: Install libfuse2
   become: true
-  ansible.builtin.file:
-    path: /opt/nvim-linux64
-    state: absent
-
-- name: Remove environment file
-  become: true
-  ansible.builtin.file:
-    path: /etc/profile.d/neovim-env.sh
-    state: absent
+  ansible.builtin.package:
+    name: "{{ libfuse_package }}"
+    state: present
+  vars:
+    libfuse_package: "{{ 'libfuse2t64' if ansible_facts['lsb']['major_release'] in ['24'] else 'libfuse2' }}"
 
 - name: Download appimage
   become: true
@@ -38,7 +34,7 @@
         name: "{{ item }}"
         selection: hold
 
-    - name: Install pyright language server
-      ansible.builtin.pip:
-        name: pyright
-        state: latest
+- name: Install pyright language server
+  community.general.pipx:
+    name: pyright
+    state: install
