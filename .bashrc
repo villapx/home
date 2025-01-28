@@ -138,6 +138,10 @@ function upd()
         update_cmd+=" && sudo snap refresh"
     fi
 
+    if [[ -n "$(command -v pipx)" ]]; then
+        update_cmd+=" && pipx upgrade-all"
+    fi
+
     cmd="${update_cmd} && ${post_command}"
     echo "$cmd"
     eval "$cmd"
