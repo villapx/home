@@ -30,8 +30,10 @@ if [[ -r "$BC" ]]; then
     source "$BC"
 fi
 
-command -v kubectl &>/dev/null && source <(kubectl completion bash)
+command -v hatch &>/dev/null && source <(_HATCH_COMPLETE=bash_source hatch)
 command -v helm &>/dev/null && source <(helm completion bash)
+command -v kubectl &>/dev/null && source <(kubectl completion bash)
+command -v pipx &>/dev/null && command -v register-python-argcomplete &>/dev/null && eval "$(register-python-argcomplete pipx)"
 command -v terraform &>/dev/null && complete -C "$(which terraform)" terraform
 command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
 
