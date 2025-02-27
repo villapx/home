@@ -163,50 +163,122 @@ cmp.setup({
     end,
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-j>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-k>'] = cmp.mapping.scroll_docs(4),
+    ["<C-j>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-k>"] = cmp.mapping.scroll_docs(4),
 
-    ['<C-Space>'] = function()
+    ["<C-e>"] = cmp.mapping.abort(),
+
+    -- if no completion is explicitly selected with TAB, insert a newline.
+    -- otherwise, confirm the highlighted completion
+    ["<CR>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    }),
+
+    -- if there's only one possible completion, complete right away
+    ["<Tab>"] = function(fallback)
       if cmp.visible() then
-        cmp.close()
-      else
-        cmp.mapping.complete()
-      end
-    end,
-
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-
-    ['<Tab>'] = function(fallback)
-      if cmp.visible() then
-        cmp.select_next_item()
+        if #cmp.get_entries() == 1 then
+          cmp.confirm({ select = true })
+        else
+          cmp.select_next_item()
+        end
       else
         fallback()
       end
     end,
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
+    { name = "nvim_lsp" },
   }, {
-    { name = 'buffer' },
+    { name = "buffer" },
   }),
 })
 
--- use 'buffer' source for `/` and `?`
-cmp.setup.cmdline({ '/', '?' }, {
-  mapping = cmp.mapping.preset.cmdline(),
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline({
+    ["<C-e>"] = cmp.mapping.abort(),
+
+    -- if no completion is explicitly selected with TAB, insert a newline.
+    -- otherwise, confirm the highlighted completion
+    ["<CR>"] = {
+       c = function(fallback)
+         if cmp.visible() and cmp.get_active_entry() then
+           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+         else
+           fallback()
+         end
+       end,
+     },
+
+    -- if there's only one possible completion, complete right away
+    ["<Tab>"] = {
+      c = function(_)
+        if cmp.visible() then
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          else
+            cmp.select_next_item()
+          end
+        else
+          cmp.complete()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          end
+        end
+      end,
+    },
+  }),
   sources = {
-    { name = 'buffer' }
+    { name = "buffer" }
   }
 })
 
--- use 'cmdline' and 'path' source for `:`
-cmp.setup.cmdline(':', {
-  mapping = cmp.mapping.preset.cmdline(),
+cmp.setup.cmdline(":", {
+  mapping = cmp.mapping.preset.cmdline({
+    ["<C-e>"] = cmp.mapping.abort(),
+
+    -- if no completion is explicitly selected with TAB, insert a newline.
+    -- otherwise, confirm the highlighted completion
+    ["<CR>"] = {
+       c = function(fallback)
+         if cmp.visible() and cmp.get_active_entry() then
+           cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+         else
+           fallback()
+         end
+       end,
+     },
+
+    -- if there's only one possible completion, complete right away
+    ["<Tab>"] = {
+      c = function(_)
+        if cmp.visible() then
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          else
+            cmp.select_next_item()
+          end
+        else
+          cmp.complete()
+          if #cmp.get_entries() == 1 then
+            cmp.confirm({ select = true })
+          end
+        end
+      end,
+    },
+  }),
   sources = cmp.config.sources({
-    { name = 'path' }
+    { name = "path", option = { treat_trailing_slash = true } }
   }, {
-    { name = 'cmdline' }
+    { name = "cmdline" }
   }),
   matching = { disallow_symbol_nonprefix_matching = false }
 })
@@ -234,7 +306,7 @@ vim.keymap.set("n", "Y", "yy", { noremap = true })
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
 local nvimtree = require("nvim-tree.api")
-vim.keymap.set("n", "<Leader>t", function() nvimtree.tree.toggle(); end, { noremap = true })
+vim.keymap.set("n", "<Leader>t", nvimtree.tree.toggle, { noremap = true })
 vim.keymap.set("n", "<Leader>T", function() nvimtree.tree.find_file({ open = true, focus = true, }); end, { noremap = true })
 
 local telescope = require("telescope.builtin")
