@@ -9,7 +9,7 @@
 - name: Download appimage
   become: true
   ansible.builtin.get_url:
-    url: https://github.com/neovim/neovim/releases/download/v{{ neovim.version }}/nvim.appimage
+    url: https://github.com/neovim/neovim/releases/download/v{{ neovim.version }}/nvim-linux-{{ ansible_facts.architecture }}.appimage
     dest: /usr/local/bin/nvim
     mode: "0755"
 
