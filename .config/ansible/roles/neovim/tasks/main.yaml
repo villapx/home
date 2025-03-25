@@ -38,3 +38,4 @@
   community.general.pipx:
     name: pyright
     state: install
+    executable: "{{ ansible_facts.user_dir }}/.local/bin/pipx"
