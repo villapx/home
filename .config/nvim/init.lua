@@ -48,6 +48,9 @@ require("lazy").setup({
     "hrsh7th/cmp-path",
   },
   {
+    "idossha/htop.nvim",
+  },
+  {
     "rebelot/kanagawa.nvim",
     config = function()
       require("kanagawa").setup({
