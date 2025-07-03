@@ -36,6 +36,7 @@ command -v kubectl &>/dev/null && source <(kubectl completion bash)
 command -v pipx &>/dev/null && command -v register-python-argcomplete &>/dev/null && eval "$(register-python-argcomplete pipx)"
 command -v terraform &>/dev/null && complete -C "$(which terraform)" terraform
 command -v thefuck &>/dev/null && eval "$(thefuck --alias)"
+command -v uv &>/dev/null && eval "$(uv generate-shell-completion bash)"
 
 # make 'less' more friendly for non-text input files.
 #   first, see if lesspipe is available (usually found on Ubuntu variants).
