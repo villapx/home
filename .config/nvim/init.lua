@@ -365,6 +365,18 @@ end
 vim.keymap.set("n", "<Leader>m", show_lsp_menu, { desc = "LSP Menu" })
 
 
+-- open alternative zip file extensions using the zip plugin
+vim.api.nvim_create_autocmd("BufReadCmd", {
+  pattern = {
+    "*.nupkg",
+    "*.whl",
+  },
+  callback = function()
+    vim.fn["zip#Browse"](vim.fn.expand("<amatch>"))
+  end,
+})
+
+
 -- chdir to the nearest-ancestor directory of the currently-opened buffer that contains a '.git' directory
 local function get_git_root()
   local dot_git_path = vim.fn.finddir(".git", ".;")
