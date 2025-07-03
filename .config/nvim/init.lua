@@ -150,6 +150,11 @@ require("lazy").setup({
       "nvim-lua/plenary.nvim",
     },
   },
+  {
+    "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+  },
 })
 
 
