@@ -301,19 +301,24 @@ cmp.setup.cmdline(":", {
 })
 
 -- set up lspconfig
-local lspconfig = require("lspconfig")
 local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-lspconfig.pyright.setup({
+
+vim.lsp.config("csharp_ls", {})
+vim.lsp.enable("csharp_ls")
+
+vim.lsp.config("pyright", {
   capabilities = cmp_nvim_lsp_capabilities
 })
-lspconfig.csharp_ls.setup({})
-lspconfig.terraformls.setup({
+vim.lsp.enable("pyright")
+
+vim.lsp.config("terraformls", {
   filetypes = {
     "hcl",
     "terraform",
     "terraform-vars",
   },
 })
+vim.lsp.enable("terraformls")
 
 
 -- keymaps
