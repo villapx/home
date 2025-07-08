@@ -165,10 +165,11 @@ vim.g.mapleader = " "
 vim.filetype.add({
   extension = {
     launch = "xml",
-    tf = "hcl",
-    tfvars = "hcl",
   },
 })
+
+vim.treesitter.language.register("hcl", "terraform")
+vim.treesitter.language.register("hcl", "terraform-vars")
 
 
 -- nvim-cmp setup
