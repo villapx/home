@@ -319,6 +319,9 @@ vim.lsp.enable("csharp_ls")
 vim.lsp.config("ty", { capabilities = cmp_nvim_lsp_capabilities })
 vim.lsp.enable("ty")
 
+vim.lsp.config("rust_analyzer", { capabilities = cmp_nvim_lsp_capabilities })
+vim.lsp.enable("rust_analyzer")
+
 vim.lsp.config("terraformls", {
   capabilities = cmp_nvim_lsp_capabilities,
   filetypes = {
