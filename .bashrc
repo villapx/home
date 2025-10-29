@@ -66,6 +66,7 @@ if [[ -n "$TERM" ]]; then
     ncolors="$(tput colors)"
     if [[ -n "$ncolors" ]] && [[ "$ncolors" -ge 8 ]]; then
         bold="$(tput bold)"
+        italic="$(tput sitm)"
         underline="$(tput smul)"
         standout="$(tput smso)"
         normal="$(tput sgr0)"
@@ -79,7 +80,7 @@ if [[ -n "$TERM" ]]; then
         white="$(tput setaf 7)"
     fi
 
-    # helper function to print out the colors
+    # helper function to print out the colors and accents to test terminal features
     printcolors()
     {
         echo "${black}"             "black"         "${normal}"
@@ -98,6 +99,12 @@ if [[ -n "$TERM" ]]; then
         echo "${bold}${cyan}"       "cyan bold"     "${normal}"
         echo "${white}"             "white"         "${normal}"
         echo "${bold}${white}"      "white bold"    "${normal}"
+
+        echo "${italic}"            "italic"        "${normal}"
+        echo "${bold}"              "bold"          "${normal}"
+        echo "${standout}"          "standout"      "${normal}"
+        echo "${underline}"         "underline"     "${normal}"
+        echo "${italic}${bold}"     "italic bold"   "${normal}"
     }
 else
     printcolors() { echo "TERM not set"; }
