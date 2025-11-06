@@ -345,36 +345,6 @@ vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
 local agitator = require("agitator")
 vim.keymap.set("n", "<Leader>gb", agitator.git_blame, { noremap = true })
 
-local function show_lsp_menu()
-  local opts = {
-    "Rename",
-    "Find References",
-    "Go to Declaration",
-    "Go to Definition",
-    "Hover Documentation",
-    "Show Code Actions",
-  }
-
-  vim.ui.select(opts, { prompt = "LSP Actions" }, function(choice)
-    if not choice then return end
-
-    if choice == "Rename" then
-      vim.lsp.buf.rename()
-    elseif choice == "Find References" then
-      vim.lsp.buf.references()
-    elseif choice == "Go to Declaration" then
-      vim.lsp.buf.declaration()
-    elseif choice == "Go to Definition" then
-      vim.lsp.buf.definition()
-    elseif choice == "Hover Documentation" then
-      vim.lsp.buf.hover()
-    elseif choice == "Show Code Actions" then
-      vim.lsp.buf.code_action()
-    end
-  end)
-end
-vim.keymap.set("n", "<Leader>m", show_lsp_menu, { desc = "LSP Menu" })
-
 
 -- open alternative zip file extensions using the zip plugin
 vim.api.nvim_create_autocmd("BufReadCmd", {
