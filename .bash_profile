@@ -23,6 +23,8 @@ varmunge ()
     esac
 }
 
+export -f varmunge
+
 varmunge PATH ~/.local/bin
 
 # rust/cargo
