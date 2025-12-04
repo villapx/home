@@ -48,6 +48,18 @@ require("lazy").setup({
     "hrsh7th/cmp-path",
   },
   {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end,
+  },
+  {
+    "zbirenbaum/copilot.lua",
+    config = function()
+      require("copilot").setup()
+    end,
+  },
+  {
     "idossha/htop.nvim",
   },
   {
@@ -213,11 +225,17 @@ cmp.setup({
       end
     end,
   }),
-  sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-  }, {
-    { name = "buffer" },
-  }),
+  sources = cmp.config.sources(
+    {
+      { name = "nvim_lsp" },
+    },
+    {
+      { name = "copilot" },
+    },
+    {
+      { name = "buffer" },
+    }
+  ),
 })
 
 cmp.setup.cmdline({ "/", "?" }, {
