@@ -1,12 +1,12 @@
 neovim:
   # https://github.com/neovim/neovim/releases
-  version: 0.11.1
+  version: 0.11.5
 
   # https://github.com/BurntSushi/ripgrep/releases
   ripgrep:
-    version: 14.1.1
+    version: 15.1.0
     apt_pkg_version_suffix: "-1"
 
   # https://github.com/sharkdp/fd/releases
   fd:
-    version: 10.2.0
+    version: 10.3.0
