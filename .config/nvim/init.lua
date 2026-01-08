@@ -156,12 +156,19 @@ require("lazy").setup({
     end,
   },
   {
+    "folke/sidekick.nvim",
+  },
+  {
     "nvim-telescope/telescope.nvim",
     tag = "0.1.6",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
     },
+  },
+  {
+    "nvim-treesitter/nvim-treesitter-textobjects",
+    branch = "main",
   },
   {
     "folke/trouble.nvim",
@@ -323,6 +330,10 @@ cmp.setup.cmdline(":", {
 -- set up lspconfig
 local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
+-- copilot language server is bundled with copilot.lua plugin, no separate installation needed
+vim.lsp.config("copilot", {})
+vim.lsp.enable("copilot")
+
 vim.lsp.config("csharp_ls", {})
 vim.lsp.enable("csharp_ls")
 
@@ -363,6 +374,12 @@ vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
 
 local agitator = require("agitator")
 vim.keymap.set("n", "<Leader>gb", agitator.git_blame, { noremap = true })
+
+local sidekickcli = require("sidekick.cli")
+vim.keymap.set({"n", "i", "t", "x"}, "<Leader>aa", sidekickcli.toggle, { noremap = true })
+vim.keymap.set({"n", "x"}, "<Leader>at", function() sidekickcli.send({ msg = "{this}" }); end, { noremap = true })
+vim.keymap.set({"n"}, "<Leader>af", function() sidekickcli.send({ msg = "{file}" }); end, { noremap = true })
+vim.keymap.set({"x"}, "<Leader>av", function() sidekickcli.send({ msg = "{selection}" }); end, { noremap = true })
 
 
 -- open alternative zip file extensions using the zip plugin
