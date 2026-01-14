@@ -160,7 +160,7 @@ require("lazy").setup({
   },
   {
     "nvim-telescope/telescope.nvim",
-    tag = "0.1.6",
+    branch = "master",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
       "nvim-lua/plenary.nvim",
