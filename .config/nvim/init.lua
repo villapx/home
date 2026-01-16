@@ -135,25 +135,8 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     branch = "main",
+    lazy = false,
     build = ":TSUpdate",
-    config = function()
-      require("nvim-treesitter").setup({
-        ensure_installed = {
-          "bash",
-          "c_sharp",
-          "hcl",
-          "lua",
-          "markdown",
-          "python",
-          "rust",
-          "vimdoc",
-          "yaml",
-        },
-        highlight = {
-          enable = true,
-        },
-      })
-    end,
   },
   {
     "folke/sidekick.nvim",
@@ -190,6 +173,27 @@ vim.filetype.add({
 
 vim.treesitter.language.register("hcl", "terraform")
 vim.treesitter.language.register("hcl", "terraform-vars")
+
+
+-- install and enable treesitter parsers
+local languages = {
+  "bash",
+  "c_sharp",
+  "hcl",
+  "lua",
+  "markdown",
+  "python",
+  "rust",
+  "vimdoc",
+  "yaml",
+}
+
+require("nvim-treesitter").install(languages)
+
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = vim.list_extend(vim.deepcopy(languages), { "terraform", "terraform-vars" }),
+  callback = function() vim.treesitter.start() end,
+})
 
 
 -- nvim-cmp setup
