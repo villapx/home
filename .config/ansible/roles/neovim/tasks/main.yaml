@@ -39,3 +39,51 @@
     name: pyright
     state: install
     executable: "{{ ansible_facts.user_dir }}/.local/bin/pipx"
+
+- name: Install tree-sitter CLI
+  block:
+    - name: Set tree-sitter executable path variable
+      ansible.builtin.set_fact:
+        tree_sitter_exe_path: "{{ ansible_facts.user_dir }}/.local/bin/tree-sitter"
+    - name: Check if tree-sitter executable exists
+      ansible.builtin.stat:
+        path: "{{ tree_sitter_exe_path }}"
+      register: tree_sitter_exe_stat
+
+    - name: Get current tree-sitter version
+      when: tree_sitter_exe_stat.stat.exists and tree_sitter_exe_stat.stat.executable
+      ansible.builtin.command:
+        cmd: "{{ tree_sitter_exe_path }} --version"
+      changed_when: false
+      register: tree_sitter_version_cmd
+
+    - name: Initialize tree_sitter_version fact
+      ansible.builtin.set_fact:
+        tree_sitter_version: "tree-sitter 0.0.0"
+
+    - name: Set tree_sitter_version fact
+      when: '"rc" in tree_sitter_version_cmd and tree_sitter_version_cmd.rc == 0'
+      ansible.builtin.set_fact:
+        tree_sitter_version: "{{ tree_sitter_version_cmd.stdout }}"
+
+    - name: Download tree-sitter CLI
+      when: tree_sitter_version.split() | last != neovim.tree_sitter.version
+      block:
+        - name: Set architecture suffix fact
+          ansible.builtin.set_fact:
+            # have only tested this on x86_64, not sure if it will work on armv7a or arm64
+            tree_sitter_arch: "{{ 'x64' if ansible_facts['architecture'] == 'x86_64' else ansible_facts['architecture'] }}"
+
+        - name: Download gzipped tree-sitter CLI executable
+          ansible.builtin.get_url:
+            url: "https://github.com/tree-sitter/tree-sitter/releases/download/v{{ neovim.tree_sitter.version }}/tree-sitter-linux-{{ tree_sitter_arch }}.gz"
+            dest: "{{ tree_sitter_exe_path }}.gz"
+
+        - name: Decompress tree-sitter CLI executable
+          ansible.builtin.command:
+            cmd: "gunzip --force {{ tree_sitter_exe_path }}.gz"
+
+        - name: Set permissions on tree-sitter CLI executable
+          ansible.builtin.file:
+            path: "{{ tree_sitter_exe_path }}"
+            mode: "755"
