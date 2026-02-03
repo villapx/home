@@ -19,106 +19,78 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+
+vim.g.mapleader = " "
+
+
 -- set up plugins.
 -- alphebetized by repo name (not repo owner)
 require("lazy").setup({
-  {
-    "emmanueltouzery/agitator.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
+  spec = {
+    {
+      "emmanueltouzery/agitator.nvim",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
     },
-  },
-  {
-    "romgrk/barbar.nvim",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
+    {
+      "romgrk/barbar.nvim",
+      dependencies = {
+        "nvim-tree/nvim-web-devicons",
+      },
     },
-  },
-  {
-    "hrsh7th/cmp-buffer",
-  },
-  {
-    "hrsh7th/cmp-cmdline",
-  },
-  {
-    "hrsh7th/cmp-nvim-lsp",
-  },
-  {
-    "hrsh7th/cmp-path",
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function()
-      require("copilot_cmp").setup()
-    end,
-  },
-  {
-    "zbirenbaum/copilot.lua",
-    config = function()
-      require("copilot").setup()
-    end,
-  },
-  {
-    "idossha/htop.nvim",
-  },
-  {
-    "rebelot/kanagawa.nvim",
-    config = function()
-      require("kanagawa").setup({
+    { "hrsh7th/cmp-buffer", },
+    { "hrsh7th/cmp-cmdline", },
+    { "hrsh7th/cmp-nvim-lsp", },
+    { "hrsh7th/cmp-path", },
+    { "zbirenbaum/copilot-cmp", },
+    { "zbirenbaum/copilot.lua", },
+    { "idossha/htop.nvim", },
+    {
+      "rebelot/kanagawa.nvim",
+      opts = {
         overrides = function(colors)
           return {
             LineNr = { fg = colors.palette.springViolet1 },
           }
         end,
-      })
-      vim.cmd("colorscheme kanagawa-wave")
-    end,
-  },
-  {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons", },
-    config = function()
-      require("lualine").setup({
-        --options = {
-        --  sections = {
-        --    lualine_z = { "location", "0x%B" },  -- not working
-        --  },
-        --},
-      })
-    end,
-  },
-  {
-    "iamcco/markdown-preview.nvim",
-    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-    ft = { "markdown" },
-    build = "cd app && npm install",
-    init = function()
-      vim.g.mkdp_filetypes = { "markdown" }
-    end,
-  },
-  {
-    "NeogitOrg/neogit",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "sindrets/diffview.nvim",
-      "nvim-telescope/telescope.nvim",
+      },
     },
-    config = true,
-  },
-  {
-    "hrsh7th/nvim-cmp",
-  },
-  {
-    "neovim/nvim-lspconfig",
-  },
-  {
-    "nvim-tree/nvim-tree.lua",
-    version = "*",
-    lazy = false,
-    dependencies = { "nvim-tree/nvim-web-devicons", },
-    config = function()
-      require("nvim-tree").setup({
+    {
+      "nvim-lualine/lualine.nvim",
+      dependencies = { "nvim-tree/nvim-web-devicons", },
+      opts = {
+        sections = {
+          lualine_z = { "location", "%B" },
+        },
+      },
+    },
+    {
+      "iamcco/markdown-preview.nvim",
+      cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+      ft = { "markdown" },
+      build = "cd app && npm install",
+      init = function()
+        vim.g.mkdp_filetypes = { "markdown" }
+      end,
+    },
+    {
+      "NeogitOrg/neogit",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+        "sindrets/diffview.nvim",
+        "nvim-telescope/telescope.nvim",
+      },
+    },
+    { "hrsh7th/nvim-cmp", },
+    { "neovim/nvim-lspconfig", },
+    {
+      "nvim-tree/nvim-tree.lua",
+      version = "*",
+      lazy = false,
+      dependencies = { "nvim-tree/nvim-web-devicons", },
+      opts = {
         view = {
           centralize_selection = true,
           float = {
@@ -129,39 +101,36 @@ require("lazy").setup({
             },
           },
         },
-      })
-    end,
-  },
-  {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    lazy = false,
-    build = ":TSUpdate",
-  },
-  {
-    "folke/sidekick.nvim",
-  },
-  {
-    "nvim-telescope/telescope.nvim",
-    branch = "master",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-      "nvim-lua/plenary.nvim",
+      },
     },
-  },
-  {
-    "nvim-treesitter/nvim-treesitter-textobjects",
-    branch = "main",
-  },
-  {
-    "folke/trouble.nvim",
-    opts = {},
-    cmd = "Trouble",
+    {
+      "nvim-treesitter/nvim-treesitter",
+      branch = "main",
+      lazy = false,
+      build = ":TSUpdate",
+    },
+    { "folke/sidekick.nvim", },
+    {
+      "nvim-telescope/telescope.nvim",
+      branch = "master",
+      dependencies = {
+        "nvim-tree/nvim-web-devicons",
+        "nvim-lua/plenary.nvim",
+      },
+    },
+    {
+      "nvim-treesitter/nvim-treesitter-textobjects",
+      branch = "main",
+    },
+    {
+      "folke/trouble.nvim",
+      opts = {},
+      cmd = "Trouble",
+    },
   },
 })
 
-
-vim.g.mapleader = " "
+vim.cmd("colorscheme kanagawa-wave")
 
 
 -- help with filetype detection
