@@ -34,9 +34,9 @@
         name: "{{ item }}"
         selection: hold
 
-- name: Install pyright language server
+- name: Install ty language server
   community.general.pipx:
-    name: pyright
+    name: ty
     state: install
     executable: "{{ ansible_facts.user_dir }}/.local/bin/pipx"
 
