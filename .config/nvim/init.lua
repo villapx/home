@@ -341,10 +341,7 @@ vim.lsp.enable("copilot")
 vim.lsp.config("csharp_ls", {})
 vim.lsp.enable("csharp_ls")
 
-vim.lsp.config("pyright", {
-  capabilities = cmp_nvim_lsp_capabilities
-})
-vim.lsp.enable("pyright")
+vim.lsp.enable("ty")
 
 vim.lsp.config("terraformls", {
   filetypes = {
