@@ -1,0 +1,7 @@
+- name: "Copy wsl.conf"
+  become: true
+  when: "'virtualization_type' in ansible_facts and ansible_facts['virtualization_type'] == 'wsl'"
+  ansible.builtin.copy:
+    src: "wsl.conf"
+    dest: "/etc/"
+    mode: "644"

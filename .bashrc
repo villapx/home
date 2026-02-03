@@ -14,6 +14,13 @@ alias mv="mv -i"
 alias rm="rm -i"
 alias valg="valgrind --tool=memcheck --leak-check=full --show-reachable=yes"
 
+# WSL by default puts the entire Windows PATH onto your Linux PATH, so we turn that off in
+# /etc/wsl.conf so that things like cmp-cmdline (neovim plugin) aren't super slow. consequently, add
+# aliases for frequently-used Windows programs here:
+if [[ -x "/mnt/c/Program Files/Tailscale/tailscale.exe" ]]; then
+    alias tailscale='/mnt/c/Program\ Files/Tailscale/tailscale.exe'
+fi
+
 HISTCONTROL=ignoreboth
 if [[ ${BASH_VERSINFO[0]} -gt 4 || (${BASH_VERSINFO[0]} -eq 4 && ${BASH_VERSINFO[1]} -ge 3) ]]
 then
