@@ -310,15 +310,17 @@ cmp.setup.cmdline(":", {
 local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
 
 -- copilot language server is bundled with copilot.lua plugin, no separate installation needed
-vim.lsp.config("copilot", {})
+vim.lsp.config("copilot", { capabilities = cmp_nvim_lsp_capabilities })
 vim.lsp.enable("copilot")
 
-vim.lsp.config("csharp_ls", {})
+vim.lsp.config("csharp_ls", { capabilities = cmp_nvim_lsp_capabilities })
 vim.lsp.enable("csharp_ls")
 
+vim.lsp.config("ty", { capabilities = cmp_nvim_lsp_capabilities })
 vim.lsp.enable("ty")
 
 vim.lsp.config("terraformls", {
+  capabilities = cmp_nvim_lsp_capabilities,
   filetypes = {
     "hcl",
     "terraform",
