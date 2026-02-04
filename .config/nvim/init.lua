@@ -44,8 +44,14 @@ require("lazy").setup({
     { "hrsh7th/cmp-cmdline", },
     { "hrsh7th/cmp-nvim-lsp", },
     { "hrsh7th/cmp-path", },
-    { "zbirenbaum/copilot-cmp", },
-    { "zbirenbaum/copilot.lua", },
+    {
+      "zbirenbaum/copilot-cmp",
+      opts = {},
+    },
+    {
+      "zbirenbaum/copilot.lua",
+      opts = {},
+    },
     { "idossha/htop.nvim", },
     {
       "rebelot/kanagawa.nvim",
