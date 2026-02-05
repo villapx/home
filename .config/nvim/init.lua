@@ -334,10 +334,14 @@ vim.lsp.enable("terraformls")
 
 
 -- keymaps
-vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>", { noremap = true })
 vim.keymap.set("n", "Y", "yy", { noremap = true })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
+
+vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>", { noremap = true })
+vim.keymap.set({"n", "t", "x"}, "<C-q>", ":BufferClose<CR>", { noremap = true })
+vim.keymap.set({"n", "t", "x"}, "<A-l>", ":BufferNext<CR>", { noremap = true })
+vim.keymap.set({"n", "t", "x"}, "<A-h>", ":BufferPrevious<CR>", { noremap = true })
 
 local nvimtree = require("nvim-tree.api")
 vim.keymap.set("n", "<Leader>t", nvimtree.tree.toggle, { noremap = true })
