@@ -146,6 +146,17 @@ vim.filetype.add({
   },
 })
 
+vim.filetype.add({
+  extension = {
+    gotmpl = "gotmpl",
+  },
+  pattern = {
+    [".*/templates/.*%.tpl"] = "helm",
+    [".*/templates/.*%.ya?ml"] = "helm",
+    ["helmfile.*%.ya?ml"] = "helm",
+  },
+})
+
 vim.treesitter.language.register("hcl", "terraform")
 vim.treesitter.language.register("hcl", "terraform-vars")
 
@@ -154,7 +165,9 @@ vim.treesitter.language.register("hcl", "terraform-vars")
 local languages = {
   "bash",
   "c_sharp",
+  "gotmpl",
   "hcl",
+  "helm",
   "lua",
   "markdown",
   "python",
