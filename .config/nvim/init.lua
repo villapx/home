@@ -371,7 +371,7 @@ local neogit = require("neogit")
 vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
 
 local agitator = require("agitator")
-vim.keymap.set("n", "<Leader>gb", agitator.git_blame, { noremap = true })
+vim.keymap.set("n", "<Leader>gb", agitator.git_blame_toggle, { noremap = true })
 
 local sidekickcli = require("sidekick.cli")
 vim.keymap.set({"n", "i", "t", "x"}, "<Leader>aa", sidekickcli.toggle, { noremap = true })
