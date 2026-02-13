@@ -351,6 +351,8 @@ vim.keymap.set("n", "Y", "yy", { noremap = true })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
+vim.keymap.set('n', 'K', function() vim.lsp.buf.hover { border = "single" } end, { desc = "Hover documentation" })
+
 vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>", { noremap = true })
 vim.keymap.set({"n", "t", "x"}, "<C-q>", ":BufferClose<CR>", { noremap = true })
 vim.keymap.set({"n", "t", "x"}, "<A-l>", ":BufferNext<CR>", { noremap = true })
