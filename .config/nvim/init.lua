@@ -376,7 +376,7 @@ local agitator = require("agitator")
 vim.keymap.set("n", "<Leader>gb", agitator.git_blame_toggle, { noremap = true })
 
 local sidekickcli = require("sidekick.cli")
-vim.keymap.set({"n", "i", "t", "x"}, "<Leader>aa", sidekickcli.toggle, { noremap = true })
+vim.keymap.set({"n", "x"}, "<Leader>aa", sidekickcli.toggle, { noremap = true })
 vim.keymap.set({"n", "x"}, "<Leader>at", function() sidekickcli.send({ msg = "{this}" }); end, { noremap = true })
 vim.keymap.set({"n"}, "<Leader>af", function() sidekickcli.send({ msg = "{file}" }); end, { noremap = true })
 vim.keymap.set({"x"}, "<Leader>av", function() sidekickcli.send({ msg = "{selection}" }); end, { noremap = true })
