@@ -115,7 +115,22 @@ require("lazy").setup({
       lazy = false,
       build = ":TSUpdate",
     },
-    { "folke/sidekick.nvim", },
+    {
+      "folke/sidekick.nvim",
+      opts = {
+        cli = {
+          mux = {
+            enabled = true,
+            backend = "tmux",
+            create = "split",
+            split = {
+              vertical = true,
+              size = 0.25,
+            },
+          },
+        },
+      },
+    },
     {
       "nvim-telescope/telescope.nvim",
       branch = "master",
