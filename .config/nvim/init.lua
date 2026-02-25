@@ -50,7 +50,16 @@ require("lazy").setup({
     },
     {
       "zbirenbaum/copilot.lua",
-      opts = {},
+      opts = {
+        suggestion = {
+          -- disable direct copilot suggestions since I use nvim-cmp to provide those
+          enabled = false,
+        },
+        panel = {
+          -- disable panel since, again, I use nvim-cmp's popup
+          enabled = false,
+        },
+      },
     },
     { "idossha/htop.nvim", },
     {
@@ -336,10 +345,6 @@ cmp.setup.cmdline(":", {
 
 -- set up lspconfig
 local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
--- copilot language server is bundled with copilot.lua plugin, no separate installation needed
-vim.lsp.config("copilot", { capabilities = cmp_nvim_lsp_capabilities })
-vim.lsp.enable("copilot")
 
 vim.lsp.config("csharp_ls", { capabilities = cmp_nvim_lsp_capabilities })
 vim.lsp.enable("csharp_ls")
