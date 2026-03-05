@@ -357,7 +357,7 @@ function cmp_insert_sources()
   }
 
   if vim.g.is_work_pc then
-    table.insert(sources, 1, { { name = "copilot" } })
+    table.insert(sources, 2, { { name = "copilot" } })
   end
 
   return sources
