@@ -36,11 +36,47 @@ require("lazy").setup({
         "nvim-lua/plenary.nvim",
         "nvim-telescope/telescope.nvim",
       },
+      keys = {
+        {
+          "<Leader>gb",
+          function() require("agitator").git_blame_toggle() end,
+          desc = "agitator - toggle git blame",
+          mode = {"n"},
+          { noremap = true },
+        },
+      },
     },
     {
       "romgrk/barbar.nvim",
       dependencies = {
         "nvim-tree/nvim-web-devicons",
+      },
+      lazy = false,
+      keys = {
+        {
+          "<Leader><Tab>",
+          ":BufferPick<CR>",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<C-q>",
+          ":BufferClose<CR>",
+          mode = {"n", "t", "x"},
+          { noremap = true },
+        },
+        {
+          "<A-l>",
+          ":BufferNext<CR>",
+          mode = {"n", "t", "x"},
+          { noremap = true },
+        },
+        {
+          "<A-h>",
+          ":BufferPrevious<CR>",
+          mode = {"n", "t", "x"},
+          { noremap = true },
+        },
       },
     },
     { "hrsh7th/cmp-buffer", },
@@ -64,7 +100,10 @@ require("lazy").setup({
         },
       },
     },
-    { "idossha/htop.nvim", },
+    {
+      "idossha/htop.nvim",
+      cmd = "Htop",
+    },
     {
       "rebelot/kanagawa.nvim",
       opts = {
@@ -100,13 +139,21 @@ require("lazy").setup({
         "sindrets/diffview.nvim",
         "nvim-telescope/telescope.nvim",
       },
+      keys = {
+        {
+          "<Leader>gs",
+          function() require("neogit").open() end,
+          desc = "Open neogit",
+          mode = {"n"},
+          { noremap = true },
+        },
+      },
     },
     { "hrsh7th/nvim-cmp", },
     { "neovim/nvim-lspconfig", },
     {
       "nvim-tree/nvim-tree.lua",
       version = "*",
-      lazy = false,
       dependencies = { "nvim-tree/nvim-web-devicons", },
       opts = {
         view = {
@@ -118,6 +165,22 @@ require("lazy").setup({
               height = 50,
             },
           },
+        },
+      },
+      keys = {
+        {
+          "<Leader>t",
+          function() require("nvim-tree.api").tree.toggle() end,
+          desc = "Toggle nvim-tree",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>T",
+          function() require("nvim-tree.api").tree.find_file({ open = true, focus = true, }); end,
+          desc = "Open nvim-tree to currently-opened file",
+          mode = {"n"},
+          { noremap = true },
         },
       },
     },
@@ -145,6 +208,36 @@ require("lazy").setup({
           },
         },
       },
+      keys = {
+        {
+          "<Leader>aa",
+          function() require("sidekick.cli").toggle() end,
+          desc = "Sidekick toggle",
+          mode = {"n", "x"},
+          { noremap = true },
+        },
+        {
+          "<Leader>at",
+          function() require("sidekick.cli").send({ msg = "{this}" }); end,
+          desc = "Send this",
+          mode = {"n", "x"},
+          { noremap = true },
+        },
+        {
+          "<Leader>af",
+          function() require("sidekick.cli").send({ msg = "{file}" }); end,
+          desc = "Send current file",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>av",
+          function() require("sidekick.cli").send({ msg = "{selection}" }); end,
+          desc = "Send current visual selection",
+          mode = {"x"},
+          { noremap = true },
+        },
+      },
     },
     {
       "nvim-telescope/telescope.nvim",
@@ -152,6 +245,43 @@ require("lazy").setup({
       dependencies = {
         "nvim-tree/nvim-web-devicons",
         "nvim-lua/plenary.nvim",
+      },
+      keys = {
+        {
+          "<Leader>ff",
+          function() require("telescope.builtin").find_files({hidden = true}); end,
+          desc = "Telescope find_files",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>fg",
+          function() require("telescope.builtin").live_grep() end,
+          desc = "Telescope live_grep",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>fo",
+          function() require("telescope.builtin").buffers() end,
+          desc = "Telescope buffers",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>fb",
+          function() require("telescope.builtin").git_branches() end,
+          desc = "Telescope git_branches",
+          mode = {"n"},
+          { noremap = true },
+        },
+        {
+          "<Leader>fh",
+          function() require("telescope.builtin").help_tags() end,
+          desc = "Telescope help_tags",
+          mode = {"n"},
+          { noremap = true },
+        },
       },
     },
     {
@@ -380,40 +510,12 @@ vim.lsp.config("terraformls", {
 vim.lsp.enable("terraformls")
 
 
--- keymaps
+-- non-plugin keymaps
 vim.keymap.set("n", "Y", "yy", { noremap = true })
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
 
-vim.keymap.set('n', 'K', function() vim.lsp.buf.hover { border = "single" } end, { desc = "Hover documentation" })
-
-vim.keymap.set("n", "<Leader><Tab>", ":BufferPick<CR>", { noremap = true })
-vim.keymap.set({"n", "t", "x"}, "<C-q>", ":BufferClose<CR>", { noremap = true })
-vim.keymap.set({"n", "t", "x"}, "<A-l>", ":BufferNext<CR>", { noremap = true })
-vim.keymap.set({"n", "t", "x"}, "<A-h>", ":BufferPrevious<CR>", { noremap = true })
-
-local nvimtree = require("nvim-tree.api")
-vim.keymap.set("n", "<Leader>t", nvimtree.tree.toggle, { noremap = true })
-vim.keymap.set("n", "<Leader>T", function() nvimtree.tree.find_file({ open = true, focus = true, }); end, { noremap = true })
-
-local telescope = require("telescope.builtin")
-vim.keymap.set("n", "<Leader>ff", function() telescope.find_files({hidden = true}); end, { noremap = true })
-vim.keymap.set("n", "<Leader>fg", telescope.live_grep, { noremap = true })
-vim.keymap.set("n", "<Leader>fo", telescope.buffers, { noremap = true })
-vim.keymap.set("n", "<Leader>fb", telescope.git_branches, { noremap = true })
-vim.keymap.set("n", "<Leader>fh", telescope.help_tags, { noremap = true })
-
-local neogit = require("neogit")
-vim.keymap.set("n", "<Leader>gs", neogit.open, { noremap = true })
-
-local agitator = require("agitator")
-vim.keymap.set("n", "<Leader>gb", agitator.git_blame_toggle, { noremap = true })
-
-local sidekickcli = require("sidekick.cli")
-vim.keymap.set({"n", "x"}, "<Leader>aa", sidekickcli.toggle, { noremap = true })
-vim.keymap.set({"n", "x"}, "<Leader>at", function() sidekickcli.send({ msg = "{this}" }); end, { noremap = true })
-vim.keymap.set({"n"}, "<Leader>af", function() sidekickcli.send({ msg = "{file}" }); end, { noremap = true })
-vim.keymap.set({"x"}, "<Leader>av", function() sidekickcli.send({ msg = "{selection}" }); end, { noremap = true })
+vim.keymap.set("n", "K", function() vim.lsp.buf.hover { border = "single" } end, { desc = "Hover documentation" })
 
 
 -- open alternative zip file extensions using the zip plugin
