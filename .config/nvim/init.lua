@@ -5,6 +5,9 @@ vim.g.loaded_netrwPlugin = 1
 -- enable 24-bit terminal colors
 vim.opt.termguicolors = true
 
+-- is this a work PC or a personal PC?
+vim.g.is_work_pc = vim.fn.filereadable(vim.fn.expand("~/.config/nvim/.work")) == 1
+
 -- bootstrap lazy.nvim -- https://github.com/folke/lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -212,6 +215,24 @@ vim.api.nvim_create_autocmd("FileType", {
 
 
 -- nvim-cmp setup
+
+function cmp_insert_sources()
+  local sources = {
+    {
+      { name = "nvim_lsp" },
+    },
+    {
+      { name = "buffer" },
+    },
+  }
+
+  if vim.g.is_work_pc then
+    table.insert(sources, 1, { { name = "copilot" } })
+  end
+
+  return sources
+end
+
 local cmp = require("cmp")
 cmp.setup({
   snippet = {
@@ -252,17 +273,7 @@ cmp.setup({
       end
     end,
   }),
-  sources = cmp.config.sources(
-    {
-      { name = "nvim_lsp" },
-    },
-    {
-      { name = "copilot" },
-    },
-    {
-      { name = "buffer" },
-    }
-  ),
+  sources = cmp.config.sources(unpack(cmp_insert_sources())),
 })
 
 cmp.setup.cmdline({ "/", "?" }, {
