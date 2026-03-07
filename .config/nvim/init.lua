@@ -79,6 +79,12 @@ require("lazy").setup({
         },
       },
     },
+    {
+      "tzachar/cmp-ai",
+      dependencies = {
+        "nvim-lua/plenary.nvim",
+      },
+    },
     { "hrsh7th/cmp-buffer", },
     { "hrsh7th/cmp-cmdline", },
     { "hrsh7th/cmp-nvim-lsp", },
@@ -358,6 +364,23 @@ function cmp_insert_sources()
 
   if vim.g.is_work_pc then
     table.insert(sources, 2, { { name = "copilot" } })
+  else
+    local cmp_ai = require("cmp_ai.config")
+    cmp_ai:setup({
+      max_lines = 100,
+      provider = "LlamaCpp",
+      provider_options = {
+        model = "Qwen2.5-Coder-7B-Q4_K_M",
+        url = "http://charli:9000/v1/completions",
+        api_key = "none-required",
+      },
+      notify = true,
+      notify_callback = function(msg)
+        vim.notify(msg)
+      end,
+      run_on_every_keystroke = true,
+    })
+    table.insert(sources, 2, { { name = "cmp_ai" } })
   end
 
   return sources
