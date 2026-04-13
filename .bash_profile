@@ -1,7 +1,7 @@
 # vim: set filetype=bash :
 
-export LANG=en_US.UTF-8
-export EDITOR=nvim
+export LANG="en_US.UTF-8"
+export EDITOR="nvim"
 
 # prevent "others" from getting write permission on created files
 umask 2
@@ -31,6 +31,11 @@ varmunge PATH ~/.local/bin
 if [[ -r "$HOME/.cargo/env" ]]; then
     source "$HOME/.cargo/env"
 fi
+
+# go
+for dir in /usr/local/go/bin ~/go/bin ; do
+    varmunge PATH "$dir" after
+done
 
 # source site-specific bash_profile file, if it exists and is readable
 if [[ -r ~/.bash_profile-site ]]; then
