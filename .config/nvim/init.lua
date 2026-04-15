@@ -488,19 +488,31 @@ cmp.setup.cmdline(":", {
 })
 
 -- set up lspconfig
-local cmp_nvim_lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+local lsp_capabilities = vim.tbl_deep_extend(
+  "force",
+  require("cmp_nvim_lsp").default_capabilities(),
+  {
+    workspace = {
+      didChangeWatchedFiles = {
+        -- force-enable dynamic registration for watched files, so the LSP server can automatically pick up changes to
+        -- files outside of the current buffer
+        dynamicRegistration = true,
+      },
+    },
+  }
+)
 
-vim.lsp.config("csharp_ls", { capabilities = cmp_nvim_lsp_capabilities })
+vim.lsp.config("csharp_ls", { capabilities = lsp_capabilities })
 vim.lsp.enable("csharp_ls")
 
-vim.lsp.config("pyright", { capabilities = cmp_nvim_lsp_capabilities })
+vim.lsp.config("pyright", { capabilities = lsp_capabilities })
 vim.lsp.enable("pyright")
 
-vim.lsp.config("rust_analyzer", { capabilities = cmp_nvim_lsp_capabilities })
+vim.lsp.config("rust_analyzer", { capabilities = lsp_capabilities })
 vim.lsp.enable("rust_analyzer")
 
 vim.lsp.config("terraformls", {
-  capabilities = cmp_nvim_lsp_capabilities,
+  capabilities = lsp_capabilities,
   filetypes = {
     "hcl",
     "terraform",
