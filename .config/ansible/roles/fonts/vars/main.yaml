@@ -1,7 +1,8 @@
 fonts_dir: "{{ ansible_facts.user_dir }}/.local/share/fonts"
 
 nerd_fonts:
-  version: v3.2.1
+  # https://github.com/ryanoasis/nerd-fonts/releases
+  version: v3.4.0
   fonts:
     - name: BitstreamVeraSansMono
       indicator_file: BitstromWeraNerdFont-Regular.ttf
