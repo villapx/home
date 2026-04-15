@@ -4,17 +4,10 @@
 
 https://pipx.pypa.io/stable/
 
-For Ubuntu 23.04 or above:
-```bash
-sudo apt update
-sudo apt install python3-pipx
-pipx ensurepath
-```
+https://pypi.org/project/pipx-in-pipx/
 
-Otherwise:
 ```bash
-python3 -m pip install --user pipx
-python3 -m pipx ensurepath
+python3 -m pip install --user pipx-in-pipx
 ```
 
 ## Install Ansible
