@@ -203,7 +203,7 @@ require("lazy").setup({
             create = "split",
             split = {
               vertical = true,
-              size = 0.25,
+              size = 0.33,
             },
           },
         },
