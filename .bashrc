@@ -3,7 +3,7 @@
 # aliases
 alias awkremovedups="awk '!seen[\$0]++'"
 alias cp="cp -i"
-alias datetime="date +%Y-%m-%d_%H%M%S"
+alias datetime="date '+%Y%m%dT%H%M%S%z'"
 alias gitlogquick="git log --pretty='format:%C(auto)%h %C(magenta)%as%C(auto)%d %s' --decorate --graph -n15"
 alias gitupdaterpo="git pull && git submodule update --recursive && git remote prune origin && git submodule foreach --recursive 'git remote prune origin'"
 alias grep="grep --color=auto"
