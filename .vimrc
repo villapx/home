@@ -1,59 +1,13 @@
-set nocompatible    " turn off Vi compatibility
+" turn off Vi compatibility
+set nocompatible
 
-
-
-""" Vundle stuff """
-
-filetype off
-
-" include and start Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-" plugins
-Plugin 'pearofducks/ansible-vim'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'vim-scripts/DoxygenToolkit.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'aklt/plantuml-syntax'
-Plugin 'python-mode/python-mode'
-Plugin 'tsiemens/vim-aftercolors'
-Plugin 'hashivim/vim-terraform'
-
-" color schemes
-Plugin 'michalbachowski/vim-wombat256mod'
-
-call vundle#end()
-filetype plugin indent on
-
-
-
-""" Enable built-in plugins """
+" enable built-in plugins
 packadd! matchit
-
 
 
 """ keymaps """
 
 let mapleader = " "
-
-" need to remap PythonMode 'breakpoint' keymap before we set the CtrlP hotkeys
-let g:pymode_breakpoint_bind = '<Leader>k'
-
-" NERDTree
-" Toggle the NERDTree file explorer
-noremap <Leader>n :NERDTreeToggle <CR>
-
-" CtrlP
-" open in file mode
-noremap <Leader>f :CtrlP <CR>
-" open in buffer mode
-noremap <Leader>b :CtrlPBuffer <CR>
-
-" Python-mode
-let g:pymode_options_max_line_length = 100
 
 " toggle relative or non-relative line numbers
 function! LineNumberToggle()
@@ -99,34 +53,14 @@ nnoremap <C-left> :vertical resize -2<CR>
 inoremap <S-tab> <C-d>
 
 
-""" non-basic settings """
+""" basic VIM settings """
 
-"" CtrlP settings
-let g:ctrlp_arg_map = 1
-
-"" NERDTree settings
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden = 1
-
-"" PythonMode settings
-" disable automatic code folding
-let g:pymode_folding = 0
-" disable coloring the 80th column
-let g:pymode_options_colorcolumn = 0
-" relax the McCabe complexity checking so it doesn't flag the canonical
-"  'for line in fileinput.input()' loop
-let g:pymode_lint_options_mccabe = { 'complexity': 21 }
-
-"" flag trailing whitespace in programming language files
+" flag trailing whitespace in programming language files
 autocmd ColorScheme * highlight TrailingWhitespace ctermbg=darkgreen guibg=darkgreen
 autocmd BufRead,BufNewFile *.py,*.pyw,*.c,*.cpp,*.h match TrailingWhitespace /\s\+$/
 
-"" open different types of files as zip files
+" open different types of files as zip files
 autocmd BufReadCmd *.nupkg call zip#Browse(expand("<amatch>"))
-
-
-
-""" basic VIM settings """
 
 " set up the handling of xterm keys when we're in a tmux session
 if $TERM =~ '^screen'
@@ -142,13 +76,8 @@ set encoding=utf-8
 " enable the mouse in normal and visual mode
 set mouse=nv
 
-" choose a color scheme (set the ones we want in reverse order, and fail
-" silently if one doesn't exist)
+" choose a color scheme
 silent! :colorscheme desert
-silent! :colorscheme industry
-if $TERM =~ "256color$"
-    silent! :colorscheme wombat256mod
-endif
 syntax on
 
 " display tab characters

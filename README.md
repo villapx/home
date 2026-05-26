@@ -35,15 +35,3 @@ supports .NET 8.0 is version `0.16.0`:
 ```bash
 dotnet tool install --global --version 0.16.0 csharp-ls
 ```
-
-## VIM
-
-Before opening VIM for the first time, run:
-
-```bash
-mkdir -p .vim/bundle
-cd .vim/bundle
-git clone https://github.com/VundleVim/Vundle.vim.git
-vim +PluginInstall +qall
-```
-
