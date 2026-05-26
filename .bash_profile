@@ -27,15 +27,23 @@ export -f varmunge
 
 varmunge PATH ~/.local/bin
 
-# rust/cargo
-if [[ -r "$HOME/.cargo/env" ]]; then
-    source "$HOME/.cargo/env"
+# dotnet
+if [[ -d ~/.dotnet/tools ]]; then
+    varmunge PATH ~/.dotnet/tools after
+fi
+if [[ -x ~/.dotnet/dotnet ]]; then
+    alias dotnet=~/.dotnet/dotnet
 fi
 
 # go
 for dir in /usr/local/go/bin ~/go/bin ; do
     varmunge PATH "$dir" after
 done
+
+# rust/cargo
+if [[ -r ~/.cargo/env ]]; then
+    source ~/.cargo/env
+fi
 
 # source site-specific bash_profile file, if it exists and is readable
 if [[ -r ~/.bash_profile-site ]]; then
