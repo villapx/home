@@ -325,6 +325,7 @@ vim.treesitter.language.register("hcl", "terraform-vars")
 local languages = {
   "bash",
   "c_sharp",
+  "cpp",
   "gotmpl",
   "hcl",
   "helm",
@@ -501,6 +502,9 @@ local lsp_capabilities = vim.tbl_deep_extend(
     },
   }
 )
+
+vim.lsp.config("clangd", { capabilities = lsp_capabilities })
+vim.lsp.enable("clangd")
 
 vim.lsp.config("csharp_ls", { capabilities = lsp_capabilities })
 vim.lsp.enable("csharp_ls")
