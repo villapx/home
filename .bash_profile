@@ -27,12 +27,11 @@ export -f varmunge
 
 varmunge PATH ~/.local/bin
 
-# dotnet
-if [[ -d ~/.dotnet/tools ]]; then
+# dotnet (scripted install)
+if [[ -x ~/.dotnet/dotnet && -d ~/.dotnet/tools ]]; then
+    varmunge PATH ~/.dotnet after
     varmunge PATH ~/.dotnet/tools after
-fi
-if [[ -x ~/.dotnet/dotnet ]]; then
-    alias dotnet=~/.dotnet/dotnet
+    export DOTNET_ROOT=~/.dotnet
 fi
 
 # go
