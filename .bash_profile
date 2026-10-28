@@ -27,11 +27,15 @@ export -f varmunge
 
 varmunge PATH ~/.local/bin
 
-# dotnet (scripted install)
+# dotnet
 if [[ -x ~/.dotnet/dotnet && -d ~/.dotnet/tools ]]; then
+    # scripted install
     varmunge PATH ~/.dotnet after
     varmunge PATH ~/.dotnet/tools after
     export DOTNET_ROOT=~/.dotnet
+elif [[ -x /usr/bin/dotnet && -d ~/.dotnet/tools ]]; then
+    # package manager install
+    varmunge PATH ~/.dotnet/tools after
 fi
 
 # go
