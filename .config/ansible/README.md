@@ -10,6 +10,14 @@ https://pypi.org/project/pipx-in-pipx/
 python3 -m pip install --user pipx-in-pipx
 ```
 
+Or, per [this issue](https://github.com/pypa/pipx/issues/1481):
+
+```bash
+sudo apt install pipx
+pipx install pipx
+sudo apt purge --autoremove pipx
+```
+
 ## Install Ansible
 
 https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html
